@@ -1,22 +1,60 @@
-import { useState } from 'react';
-import { X, Sparkles } from 'lucide-react';
-import { WARDEN as AUGUR_MCGEE, getStaticAdvice, calcPositionNeeds } from '../utils/wardenAdvice.js';
+import { useState, useEffect, useCallback } from 'react';
+import { X, Sparkles, Loader2 } from 'lucide-react';
+import { WARDEN, getStaticAdvice, calcPositionNeeds } from '../utils/wardenAdvice.js';
 
 export default function AdvisorPanel({ myRoster, currentPick, available }) {
   const [open, setOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('draft');
   const [askInput, setAskInput] = useState('');
+  const [advice, setAdvice] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Calculate positional needs
   const positionNeeds = calcPositionNeeds(myRoster);
 
-  const advice = getStaticAdvice(activeTab, myRoster, positionNeeds, currentPick, available);
+  const fetchAdvice = useCallback(async (tab, question = '') => {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/api/advice', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tab,
+          roster: myRoster,
+          needs: positionNeeds,
+          available,
+          currentPick,
+          question,
+        }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      setAdvice(data);
+    } catch {
+      // Fallback to static advice on error
+      setAdvice(getStaticAdvice(tab, myRoster, positionNeeds, currentPick, available));
+    } finally {
+      setIsLoading(false);
+    }
+  }, [myRoster, positionNeeds, available, currentPick]);
+
+  // Fetch when panel opens or tab changes (not for 'ask' — user triggers that manually)
+  useEffect(() => {
+    if (open && activeTab !== 'ask') {
+      fetchAdvice(activeTab);
+    }
+    if (open && activeTab === 'ask') {
+      // Show static prompt state for ask tab until user submits
+      setAdvice(getStaticAdvice('ask', myRoster, positionNeeds, currentPick, available));
+    }
+  }, [open, activeTab]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const displayAdvice = advice || getStaticAdvice(activeTab, myRoster, positionNeeds, currentPick, available);
 
   const tabs = [
-    { id: 'draft', label: 'Draft Advice' },
+    { id: 'draft',     label: 'Draft Advice' },
     { id: 'freeagent', label: 'Pickups' },
-    { id: 'lineup', label: 'Lineup' },
-    { id: 'ask', label: 'Ask Augur' },
+    { id: 'lineup',    label: 'Lineup' },
+    { id: 'ask',       label: 'Ask Warden' },
   ];
 
   return (
@@ -41,13 +79,13 @@ export default function AdvisorPanel({ myRoster, currentPick, available }) {
             {/* Header */}
             <div className="flex items-center justify-between p-5 border-b border-[#2a2a2a] bg-[#0a0a0a]">
               <div className="flex items-center gap-3">
-                <div className="text-3xl">{AUGUR_MCGEE.emoji}</div>
+                <div className="text-3xl">{WARDEN.emoji}</div>
                 <div>
                   <div className="text-sm font-bold text-[#DFFF00] font-mono uppercase">
-                    {AUGUR_MCGEE.name}
+                    {WARDEN.name}
                   </div>
                   <div className="text-[10px] text-[#555] font-mono">
-                    {AUGUR_MCGEE.title}
+                    {WARDEN.title}
                   </div>
                 </div>
               </div>
@@ -64,6 +102,7 @@ export default function AdvisorPanel({ myRoster, currentPick, available }) {
                   onClick={() => {
                     setActiveTab(tab.id);
                     setAskInput('');
+                    setAdvice(null);
                   }}
                   className={`flex-1 py-3 text-[11px] font-mono tracking-widest uppercase transition-all border-b-2 ${
                     activeTab === tab.id
@@ -78,48 +117,59 @@ export default function AdvisorPanel({ myRoster, currentPick, available }) {
 
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-5 space-y-4">
-              {/* Advice text */}
-              <div className="space-y-2">
-                <p className="text-sm text-[#ccc] font-mono leading-relaxed">
-                  {advice.line1}
-                </p>
-                <p className="text-sm text-[#999] font-mono leading-relaxed">
-                  {advice.line2}
-                </p>
-                <p className="text-xs text-[#666] font-mono italic leading-relaxed">
-                  {advice.line3}
-                </p>
-              </div>
-
-              {/* Suggestions list */}
-              {advice.suggestions.length > 0 && (
-                <div className="space-y-1 pt-2 border-t border-[#1a1a1a]">
-                  <div className="text-[10px] text-[#555] font-mono tracking-wider uppercase">Suggestions</div>
-                  {advice.suggestions.map((sugg, i) => (
-                    <div key={i} className="text-xs text-[#DFFF00] font-mono pl-2 border-l border-[#DFFF00]/30">
-                      • {sugg}
-                    </div>
-                  ))}
+              {isLoading ? (
+                <div className="flex flex-col items-center justify-center py-12 gap-3">
+                  <Loader2 size={20} className="animate-spin text-[#BF00FF]" />
+                  <div className="text-[11px] text-[#555] font-mono tracking-widest">THE WARDEN CONSULTS THE RUNES...</div>
                 </div>
-              )}
-
-              {/* Ask input */}
-              {activeTab === 'ask' && (
-                <div className="pt-4 border-t border-[#1a1a1a] space-y-2">
-                  <input
-                    type="text"
-                    placeholder="Ask Augur something..."
-                    value={askInput}
-                    onChange={e => setAskInput(e.target.value)}
-                    className="w-full bg-[#1a1a1a] border border-[#2a2a2a] text-white text-xs font-mono px-3 py-2 placeholder-[#333] focus:outline-none focus:border-[#DFFF00]"
-                  />
-                  <button className="w-full px-3 py-2 text-xs font-mono font-bold bg-[#DFFF00] text-black hover:bg-white transition-all">
-                    CONSULT
-                  </button>
-                  <div className="text-[10px] text-[#333] font-mono">
-                    (Phase 1 shell — Claude AI coming Phase 3)
+              ) : (
+                <>
+                  {/* Advice text */}
+                  <div className="space-y-2">
+                    <p className="text-sm text-[#ccc] font-mono leading-relaxed">
+                      {displayAdvice.line1}
+                    </p>
+                    <p className="text-sm text-[#999] font-mono leading-relaxed">
+                      {displayAdvice.line2}
+                    </p>
+                    <p className="text-xs text-[#666] font-mono italic leading-relaxed">
+                      {displayAdvice.line3}
+                    </p>
                   </div>
-                </div>
+
+                  {/* Suggestions list */}
+                  {displayAdvice.suggestions.length > 0 && (
+                    <div className="space-y-1 pt-2 border-t border-[#1a1a1a]">
+                      <div className="text-[10px] text-[#555] font-mono tracking-wider uppercase">Suggestions</div>
+                      {displayAdvice.suggestions.map((sugg, i) => (
+                        <div key={i} className="text-xs text-[#DFFF00] font-mono pl-2 border-l border-[#DFFF00]/30">
+                          • {sugg}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Ask input */}
+                  {activeTab === 'ask' && (
+                    <div className="pt-4 border-t border-[#1a1a1a] space-y-2">
+                      <input
+                        type="text"
+                        placeholder="Ask The Warden something..."
+                        value={askInput}
+                        onChange={e => setAskInput(e.target.value)}
+                        onKeyDown={e => e.key === 'Enter' && askInput.trim() && fetchAdvice('ask', askInput)}
+                        className="w-full bg-[#1a1a1a] border border-[#2a2a2a] text-white text-xs font-mono px-3 py-2 placeholder-[#333] focus:outline-none focus:border-[#DFFF00]"
+                      />
+                      <button
+                        onClick={() => askInput.trim() && fetchAdvice('ask', askInput)}
+                        disabled={!askInput.trim()}
+                        className="w-full px-3 py-2 text-xs font-mono font-bold bg-[#DFFF00] text-black hover:bg-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                      >
+                        CONSULT
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
 
               {/* Roster context indicator */}

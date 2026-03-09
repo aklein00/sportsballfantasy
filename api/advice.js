@@ -46,7 +46,7 @@ export default async function handler(request, response) {
   }
 
   try {
-    const { tab, roster, needs, question, available } = request.body;
+    const { tab, roster, needs, question, available, currentPick } = request.body;
 
     if (!tab) {
       return response.status(400).json({ error: 'Missing required field: tab' });
@@ -56,6 +56,9 @@ export default async function handler(request, response) {
     let userPrompt = '';
     
     switch (tab) {
+      case 'draft':
+        userPrompt = buildDraftPrompt(roster, needs, currentPick, available);
+        break;
       case 'lineup':
         userPrompt = buildLineupPrompt(roster, needs);
         break;
@@ -95,6 +98,26 @@ export default async function handler(request, response) {
 }
 
 // Build context-aware prompts for each tab
+
+function buildDraftPrompt(roster, needs, currentPick, available) {
+  const round = currentPick ? Math.ceil(currentPick / 16) : '?';
+  const pickInRound = currentPick ? ((currentPick - 1) % 16) + 1 : '?';
+  const needsList = Object.entries(needs || {}).filter(([_, v]) => v === 'need').map(([k]) => k);
+  const rosterNames = (roster || []).map(p => `${p.name} (${p.positions?.join('/')})`).join(', ') || 'none yet';
+  const top10 = (available || []).slice(0, 10).map(p =>
+    `- ${p.name} (${p.positions?.join('/')}, ${p.team || 'NL'}) Tier ${p.tier || '?'} — BA:${p.stats?.avg || '?'} HR:${p.stats?.hr || '?'} SB:${p.stats?.sb || '?'}`
+  ).join('\n');
+
+  return `Snake draft in progress. NL-only league. 20 rounds, 16 teams.
+Current pick: #${currentPick || '?'} (Round ${round}, pick ${pickInRound} in round)
+Roster so far (${roster?.length || 0} players): ${rosterNames}
+Unfilled positions needed: ${needsList.length > 0 ? needsList.join(', ') : 'none — looking for best available'}
+
+Top 10 available players:
+${top10 || 'None provided'}
+
+Advice needed: Recommend my top 3 picks right now. Explain why each fits my roster and addresses my positional needs. Consider NL-only eligibility, category contribution (BA/HR/R/RBI/SB for hitters; ERA/K/S/W/WHIP for pitchers), and round value.`;
+}
 
 function buildLineupPrompt(roster, needs) {
   const rosterCount = roster?.length || 0;
