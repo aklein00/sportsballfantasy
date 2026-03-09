@@ -1,0 +1,70 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sphereGlow" cx="50%" cy="40%">
+      <stop offset="0%" style="stop-color:#FFE600;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF006E;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#4B0082;stop-opacity:0.3" />
+    </radialGradient>
+    <filter id="innerGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="chaos">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+    </filter>
+  </defs>
+
+  <!-- Void black background -->
+  <rect width="200" height="200" fill="#0A0A0A"/>
+
+  <!-- Outer ring - spiky mystical energy -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#FF006E" stroke-width="2" opacity="0.6"/>
+
+  <!-- Spikes around the circle (8 points, punk style) -->
+  <g stroke="#FFE600" stroke-width="2.5" opacity="0.8">
+    <line x1="100" y1="15" x2="100" y2="5" />
+    <line x1="160" y1="25" x2="168" y2="17" />
+    <line x1="185" y1="100" x2="195" y2="100" />
+    <line x1="160" y1="175" x2="168" y2="183" />
+    <line x1="100" y1="185" x2="100" y2="195" />
+    <line x1="40" y1="175" x2="32" y2="183" />
+    <line x1="15" y1="100" x2="5" y2="100" />
+    <line x1="40" y1="25" x2="32" y2="17" />
+  </g>
+
+  <!-- Inner mystical rings -->
+  <circle cx="100" cy="100" r="70" fill="none" stroke="#4B0082" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="100" cy="100" r="60" fill="none" stroke="#39FF14" stroke-width="1" opacity="0.4"/>
+
+  <!-- Main crystal sphere with gradient glow -->
+  <circle cx="100" cy="100" r="45" fill="url(#sphereGlow)" filter="url(#innerGlow)"/>
+
+  <!-- Inner core - acid green spark -->
+  <circle cx="100" cy="90" r="18" fill="#39FF14" opacity="0.9" filter="url(#innerGlow)"/>
+
+  <!-- Highlight - electric yellow -->
+  <circle cx="92" cy="82" r="8" fill="#FFE600" opacity="0.95"/>
+
+  <!-- Chaotic energy lines radiating from sphere (3 streaks) -->
+  <g stroke="#FFE600" stroke-width="1.5" fill="none" opacity="0.7">
+    <path d="M 100 55 Q 85 40, 75 25" stroke-linecap="round"/>
+    <path d="M 145 100 Q 160 100, 180 95" stroke-linecap="round"/>
+    <path d="M 100 145 Q 115 160, 125 180" stroke-linecap="round"/>
+  </g>
+
+  <!-- Magenta accent streaks (chaos element) -->
+  <g stroke="#FF006E" stroke-width="1" fill="none" opacity="0.6">
+    <path d="M 115 70 Q 125 60, 130 45"/>
+    <path d="M 130 130 Q 140 140, 150 155"/>
+  </g>
+
+  <!-- Small sparks (detail) -->
+  <circle cx="75" cy="120" r="1.5" fill="#FFE600" opacity="0.8"/>
+  <circle cx="125" cy="85" r="1" fill="#39FF14" opacity="0.7"/>
+  <circle cx="110" cy="155" r="1.5" fill="#FF006E" opacity="0.7"/>
+  <circle cx="85" cy="75" r="1" fill="#FFE600" opacity="0.6"/>
+</svg>
