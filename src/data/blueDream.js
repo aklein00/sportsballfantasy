@@ -155,8 +155,7 @@ export const HOUSE_RULES = [
   },
 ];
 
-// My team — Scribbles — initial draft state
-// Kyle Tucker: Round 1, Pick 4
+// My team — Scribbles — 2026 keepers (10 players, deadline March 6, 2026)
 export const MY_TEAM = {
   name: 'Scribbles',
   owner: 'Arthur Klein',
@@ -165,13 +164,132 @@ export const MY_TEAM = {
     {
       round: 1,
       overallPick: 4,
+      keeper: true,
       player: {
-        id: 'kyle-tucker',
-        name: 'Kyle Tucker',
-        team: 'CHC',
-        positions: ['OF', 'RF'],
+        id: 'jackson-merrill',
+        name: 'Jackson Merrill',
+        team: 'SD',
+        positions: ['CF'],
         status: 'active',
-        projectedStats: { BA: '.280', HR: 29, R: 88, RBI: 90, SB: 20 },
+        projectedStats: { BA: '.275', HR: 25, R: 90, RBI: 85, SB: 15 },
+      },
+    },
+    {
+      round: 3,
+      overallPick: 36,
+      keeper: true,
+      player: {
+        id: 'aaron-nola',
+        name: 'Aaron Nola',
+        team: 'PHI',
+        positions: ['SP'],
+        status: 'active',
+        projectedStats: { ERA: '3.50', K: 195, W: 13, S: 0, WHIP: '1.15' },
+      },
+    },
+    {
+      round: 6,
+      overallPick: 93,
+      keeper: true,
+      player: {
+        id: 'noelvi-marte',
+        name: 'Noelvi Marte',
+        team: 'CIN',
+        positions: ['3B', 'RF'],
+        status: 'active',
+        projectedStats: { BA: '.255', HR: 26, R: 82, RBI: 88, SB: 13 },
+      },
+    },
+    {
+      round: 7,
+      overallPick: 100,
+      keeper: true,
+      player: {
+        id: 'edward-cabrera',
+        name: 'Edward Cabrera',
+        team: 'CHC',
+        positions: ['SP'],
+        status: 'active',
+        projectedStats: { ERA: '3.31', K: 155, W: 11, S: 0, WHIP: '1.15' },
+      },
+    },
+    {
+      round: 8,
+      overallPick: 125,
+      keeper: true,
+      player: {
+        id: 'otto-lopez',
+        name: 'Otto Lopez',
+        team: 'MIA',
+        positions: ['2B', 'SS'],
+        status: 'active',
+        projectedStats: { BA: '.265', HR: 5, R: 68, RBI: 52, SB: 25 },
+      },
+    },
+    {
+      round: 9,
+      overallPick: 132,
+      keeper: true,
+      player: {
+        id: 'david-peterson',
+        name: 'David Peterson',
+        team: 'NYM',
+        positions: ['SP'],
+        status: 'active',
+        projectedStats: { ERA: '3.80', K: 150, W: 10, S: 0, WHIP: '1.20' },
+      },
+    },
+    {
+      round: 10,
+      overallPick: 157,
+      keeper: true,
+      player: {
+        id: 'tommy-troy',
+        name: 'Tommy Troy',
+        team: 'ARI',
+        positions: ['2B'],
+        status: 'minors',
+        projectedStats: { BA: '.260', HR: 13, R: 65, RBI: 55, SB: 21 },
+        note: 'Top-100 prospect, 2026 call-up expected',
+      },
+    },
+    {
+      round: 11,
+      overallPick: 164,
+      keeper: true,
+      player: {
+        id: 'eric-haase',
+        name: 'Eric Haase',
+        team: 'SF',
+        positions: ['C'],
+        status: 'active',
+        projectedStats: { BA: '.235', HR: 16, R: 50, RBI: 58, SB: 2 },
+      },
+    },
+    {
+      round: 12,
+      overallPick: 189,
+      keeper: true,
+      player: {
+        id: 'tyler-black',
+        name: 'Tyler Black',
+        team: 'MIL',
+        positions: ['1B'],
+        status: 'active',
+        projectedStats: { BA: '.260', HR: 15, R: 65, RBI: 70, SB: 8 },
+      },
+    },
+    {
+      round: 13,
+      overallPick: 196,
+      keeper: true,
+      player: {
+        id: 'blake-perkins',
+        name: 'Blake Perkins',
+        team: 'MIL',
+        positions: ['CF'],
+        status: 'active',
+        projectedStats: { BA: '.255', HR: 5, R: 70, RBI: 40, SB: 17 },
       },
     },
   ],
@@ -179,7 +297,7 @@ export const MY_TEAM = {
     active: [],
     reserve: [],
     injured: [],
-    minors: [],
+    minors: ['tommy-troy'],
   },
 };
 
