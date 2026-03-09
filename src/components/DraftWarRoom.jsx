@@ -4,6 +4,7 @@ import { POSITIONS_FILTER } from '../data/playerPool.js';
 import { ACTIVE_POSITIONS, MY_TURN_ALERTS } from '../data/blueDream.js';
 import RulesDrawer from './RulesDrawer.jsx';
 import AdvisorPanel from './AdvisorPanel.jsx';
+import WardenPickSuggestion from './WardenPickSuggestion.jsx';
 
 function filledCounts(myRoster) {
   const counts = {};
@@ -338,6 +339,18 @@ export default function DraftWarRoom({ playerData }) {
             <div className="text-xs font-bold text-[#DFFF00] font-mono">
               Scribbles · {myRoster.length}/21
             </div>
+          </div>
+
+          {/* Warden's Pick Suggestions */}
+          <div className="px-0 py-3 border-b border-[#2a2a2a]">
+            <WardenPickSuggestion
+              myRoster={myRoster}
+              available={available}
+              currentPick={currentPick}
+              playerData={playerData}
+              onDraftPick={draftPlayer}
+              setSearchQuery={setSearchQuery}
+            />
           </div>
 
           {/* Positional needs grid */}
