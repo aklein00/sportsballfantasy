@@ -6,6 +6,79 @@ export const WARDEN = {
   voice: 'ancient NL-only guardian',
 };
 
+export const API_CALLS_KEY = 'warden_api_calls';
+export const API_CALLS_DATE_KEY = 'warden_api_calls_date';
+export const DAILY_LIMIT = 1400;
+
+// Check if we've exceeded daily API limit
+export function shouldThrottleAPI() {
+  if (typeof window === 'undefined') return false;
+  
+  const today = new Date().toDateString();
+  const storedDate = localStorage.getItem(API_CALLS_DATE_KEY);
+  const callCount = parseInt(localStorage.getItem(API_CALLS_KEY) || '0', 10);
+  
+  // Reset counter if new day
+  if (storedDate !== today) {
+    localStorage.setItem(API_CALLS_DATE_KEY, today);
+    localStorage.setItem(API_CALLS_KEY, '0');
+    return false;
+  }
+  
+  return callCount >= DAILY_LIMIT;
+}
+
+// Increment API call counter
+export function incrementAPICalls() {
+  if (typeof window === 'undefined') return 0;
+  
+  const today = new Date().toDateString();
+  const storedDate = localStorage.getItem(API_CALLS_DATE_KEY);
+  
+  // Reset if new day
+  if (storedDate !== today) {
+    localStorage.setItem(API_CALLS_DATE_KEY, today);
+    localStorage.setItem(API_CALLS_KEY, '1');
+    return 1;
+  }
+  
+  const newCount = (parseInt(localStorage.getItem(API_CALLS_KEY) || '0', 10) + 1);
+  localStorage.setItem(API_CALLS_KEY, newCount.toString());
+  return newCount;
+}
+
+// Call Gemini API via Vercel serverless function
+export async function getGeminiAdvice(tab, roster, needs, question, available) {
+  if (shouldThrottleAPI()) {
+    return {
+      line1: 'The spirits rest today, friend.',
+      line2: `You've consulted The Warden ${DAILY_LIMIT} times. Even ancient guardians need slumber.`,
+      line3: 'Return tomorrow for more counsel.',
+      suggestions: ['Check back after midnight', 'Review your current roster', 'Study the waiver wire']
+    };
+  }
+
+  try {
+    const newCount = incrementAPICalls();
+    
+    const res = await fetch('/api/advice', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tab, roster, needs, question, available })
+    });
+
+    if (!res.ok) {
+      throw new Error(`API returned ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error('[Warden API Error]:', error);
+    // Fallback to static response on error
+    return getStaticAdvice(tab, roster, needs, null, available);
+  }
+}
+
 export function calcPositionNeeds(myRoster) {
   const filledCounts = {};
   myRoster.forEach(p => {
