@@ -17,9 +17,6 @@ export default function Header({ activeTab, setActiveTab, playerData }) {
           >
             SportsBall<span className="text-[#BF00FF]">Fantasy</span>
           </span>
-          <span className="text-[10px] text-[#BF00FF] border border-[#BF00FF] px-1.5 py-0.5 font-mono">
-            PUNK·MAGIC
-          </span>
         </div>
 
         <div className="flex items-center gap-4 text-xs text-[#555] font-mono">

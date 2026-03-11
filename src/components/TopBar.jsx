@@ -17,9 +17,6 @@ export default function TopBar({ activeLeague, activeSection, playerData }) {
         >
           SportsBall<span className="text-[#BF00FF]">Fantasy</span>
         </span>
-        <span className="text-[10px] text-[#BF00FF] border border-[#BF00FF] px-1.5 py-0.5 font-mono hidden sm:inline">
-          PUNK·MAGIC
-        </span>
       </div>
 
       {/* Breadcrumb */}
