@@ -49,7 +49,7 @@ This is the owner's personal command center. It should feel like wielding dark m
 - **State:** TBD (likely Zustand or Context)
 - **Data:** Static JSON to start, API integrations later
 - **AI:** Google Gemini API (`gemini-1.5-flash` for advisor features) — free tier: 1,500 req/day, 1M TPM. Use `@google/generative-ai` SDK. Key stored in Vercel env vars as `GEMINI_API_KEY`.
-- **Deployment:** Vercel (subdomain of utilityinfielder.com per subdomain-project-setup skill)
+- **Deployment:** Vercel at **https://sportsballfantasy.utilityinfielder.com** (canonical URL; DNS configured, add custom domain in Vercel project settings)
 - **Future Google integrations:** Google Sheets (league data export/import), Google Maps (stadium/travel context), Google Docs (league constitution)
 
 ---
