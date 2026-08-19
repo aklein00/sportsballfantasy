@@ -1,5 +1,6 @@
 // Master league registry — all sports, all leagues
 import { LEAGUE as blueDream, MY_TEAM as blueDreamTeam } from './blueDream.js';
+import { FOOTBALL_LEAGUES } from './footballLeagues.js';
 
 export const ALL_LEAGUES = [
   {
@@ -7,34 +8,10 @@ export const ALL_LEAGUES = [
     myTeam: blueDreamTeam,
     active: true,
   },
-  // Football placeholders
-  {
-    id: 'football-1',
-    name: 'Coming Soon',
-    sport: 'football',
-    platform: 'TBD',
-    season: 2026,
-    active: false,
-    myTeam: null,
-  },
-  {
-    id: 'football-2',
-    name: 'Coming Soon',
-    sport: 'football',
-    platform: 'TBD',
-    season: 2026,
-    active: false,
-    myTeam: null,
-  },
-  {
-    id: 'football-3',
-    name: 'Coming Soon',
-    sport: 'football',
-    platform: 'TBD',
-    season: 2026,
-    active: false,
-    myTeam: null,
-  },
+  ...FOOTBALL_LEAGUES.map(league => ({
+    ...league,
+    active: league.active !== false,
+  })),
 ];
 
 export const SPORT_ICONS = {
@@ -43,3 +20,11 @@ export const SPORT_ICONS = {
   basketball: '🏀',
   hockey: '🏒',
 };
+
+export function isFootballLeague(id) {
+  return FOOTBALL_LEAGUES.some(l => l.id === id);
+}
+
+export function getLeagueById(id) {
+  return ALL_LEAGUES.find(l => l.id === id) || null;
+}
