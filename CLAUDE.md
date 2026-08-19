@@ -246,17 +246,24 @@ All three leagues are **dynasty format** with **2026 startup drafts**. League ru
 
 ### Industry Football (CBS Sports)
 
+**My team:** Scoundrels (Arthur Klein) · Draft slot #8
+
 | Setting | Value |
 |---------|-------|
 | Platform | CBS Sports |
 | Format | Dynasty PPR |
-| Teams | 14 |
+| Teams | 16 |
 | Entry Fee | $75 |
 | Scoring | Full PPR |
-| Startup Draft | Jul 20, 2026 |
-| Rounds | 20 |
+| Rookie Draft | In progress (Aug 2026) |
+| Format | Linear (same slot every round) |
+| Rounds | 22 |
 
 **Roster:** QB×1, RB×2, WR×2, TE×1, FLEX×1, K×1 · Bench 12 · IR 2
+
+**2026 Rookie picks:** 1.08 KC Concepcion (WR), 2.08 Eli Stowers (TE) · Next pick: 3.08 (#40)
+
+Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS screenshots.
 
 ### Sports and Fun (CBS Sports)
 
