@@ -49,7 +49,7 @@ This is the owner's personal command center. It should feel like wielding dark m
 - **State:** TBD (likely Zustand or Context)
 - **Data:** Static JSON to start, API integrations later
 - **AI:** Google Gemini API (`gemini-1.5-flash` for advisor features) — free tier: 1,500 req/day, 1M TPM. Use `@google/generative-ai` SDK. Key stored in Vercel env vars as `GEMINI_API_KEY`.
-- **Deployment:** Vercel (subdomain of utilityinfielder.com per subdomain-project-setup skill)
+- **Deployment:** Vercel at **https://sportsballfantasy.utilityinfielder.com** (canonical URL; DNS configured, add custom domain in Vercel project settings)
 - **Future Google integrations:** Google Sheets (league data export/import), Google Maps (stadium/travel context), Google Docs (league constitution)
 
 ---
@@ -226,7 +226,51 @@ Losing a top-5 pick to the AL (during the season only) earns 2 extra PoP chips.
 
 ## Football Leagues
 
-*(To be added — structure TBD)*
+All three leagues are **dynasty format** with **2026 startup drafts**. League rules live in `src/data/footballLeagues.js`.
+
+### Californian Dynasty (Sleeper)
+
+| Setting | Value |
+|---------|-------|
+| Platform | Sleeper |
+| Format | Dynasty Superflex |
+| Teams | 12 |
+| Entry Fee | $50 |
+| Scoring | Half-PPR |
+| Startup Draft | Aug 15, 2026 |
+| Rounds | 25 |
+
+**Roster:** QB×1, RB×2, WR×2, TE×1, FLEX×2, SUPERFLEX×1 · Bench 15 · Taxi 4 · IR 3
+
+**Integration:** Connect via SleeperConnect component — pulls live rosters/drafts from Sleeper API when league is created.
+
+### Industry Football (CBS Sports)
+
+| Setting | Value |
+|---------|-------|
+| Platform | CBS Sports |
+| Format | Dynasty PPR |
+| Teams | 14 |
+| Entry Fee | $75 |
+| Scoring | Full PPR |
+| Startup Draft | Jul 20, 2026 |
+| Rounds | 20 |
+
+**Roster:** QB×1, RB×2, WR×2, TE×1, FLEX×1, K×1 · Bench 12 · IR 2
+
+### Sports and Fun (CBS Sports)
+
+| Setting | Value |
+|---------|-------|
+| Platform | CBS Sports |
+| Format | Dynasty Superflex |
+| Teams | 10 |
+| Entry Fee | $100 |
+| Scoring | Half-PPR |
+| Startup Draft | Aug 1, 2026 |
+| Rounds | 22 |
+
+**Roster:** QB×1, RB×2, WR×3, TE×1, FLEX×1, SUPERFLEX×1 · Bench 10 · IR 3
 
 ---
 

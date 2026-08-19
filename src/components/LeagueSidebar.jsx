@@ -1,9 +1,19 @@
-import { ALL_LEAGUES, SPORT_ICONS } from '../data/leagues.js';
+import { ALL_LEAGUES, SPORT_ICONS, isFootballLeague } from '../data/leagues.js';
 
-const SECTIONS = [
-  { id: 'team',       label: 'My Team',       icon: '◈' },
+const BASEBALL_SECTIONS = [
+  { id: 'team',       label: 'My Team',        icon: '◈' },
   { id: 'draft',      label: 'Draft War Room', icon: '⚡' },
   { id: 'freeagents', label: 'Free Agents',    icon: '⚾' },
+];
+
+const FOOTBALL_SECTIONS = [
+  { id: 'team',  label: 'My Team',        icon: '◈' },
+  { id: 'draft', label: 'Startup Draft',  icon: '⚡' },
+];
+
+const FOOTBALL_SLEEPER_SECTIONS = [
+  ...FOOTBALL_SECTIONS,
+  { id: 'connect', label: 'Sleeper Link', icon: '🔗' },
 ];
 
 export default function LeagueSidebar({
@@ -15,6 +25,18 @@ export default function LeagueSidebar({
   setCollapsed,
   onLeagueInfo,
 }) {
+  const isFootball = isFootballLeague(activeLeagueId);
+  const isSleeper = activeLeagueId === 'californian-dynasty';
+  const sections = isFootball
+    ? (isSleeper ? FOOTBALL_SLEEPER_SECTIONS : FOOTBALL_SECTIONS)
+    : BASEBALL_SECTIONS;
+
+  const handleLeagueSwitch = (league) => {
+    if (!league.active) return;
+    setActiveLeagueId(league.id);
+    setActiveSection('team');
+  };
+
   return (
     <aside
       className="flex flex-col border-r border-[#2a2a2a] bg-[#0a0a0a] overflow-hidden transition-all duration-200 shrink-0"
@@ -22,7 +44,7 @@ export default function LeagueSidebar({
     >
       {/* Section Nav */}
       <nav className="flex flex-col pt-3 flex-1">
-        {SECTIONS.map(s => (
+        {sections.map(s => (
           <button
             key={s.id}
             onClick={() => setActiveSection(s.id)}
@@ -63,7 +85,7 @@ export default function LeagueSidebar({
           return (
             <button
               key={league.id}
-              onClick={() => league.active && setActiveLeagueId(league.id)}
+              onClick={() => handleLeagueSwitch(league)}
               title={collapsed ? league.name : ''}
               className={`w-full flex items-center gap-3 px-4 py-2 text-xs font-mono transition-all border-l-2 ${
                 isActive

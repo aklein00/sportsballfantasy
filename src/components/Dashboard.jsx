@@ -144,16 +144,21 @@ export default function Dashboard({ playerData, myRoster }) {
         </div>
       </div>
 
-      {/* === FOOTBALL PLACEHOLDERS === */}
+      {/* === FOOTBALL DYNASTY LEAGUES === */}
       <div>
-        <div className="text-[10px] text-[#555] font-mono tracking-widest mb-3">FOOTBALL LEAGUES — COMING SOON</div>
+        <div className="text-[10px] text-[#DFFF00] font-mono tracking-widest mb-3">FOOTBALL DYNASTY — 2026 STARTUPS</div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {footballLeagues.map((league, i) => (
-            <div key={league.id} className="punk-card p-5 border-dashed opacity-40 hover:opacity-60 transition-opacity" style={{ borderColor: '#2a2a2a' }}>
+          {footballLeagues.map((league) => (
+            <div key={league.id} className="punk-card p-5 hover:border-[#BF00FF]/50 transition-all">
               <div className="text-3xl mb-2">🏈</div>
-              <div className="text-xs text-[#555] font-mono">FOOTBALL LEAGUE {i + 1}</div>
-              <div className="text-lg font-bold text-[#BF00FF] mt-1">???</div>
-              <div className="text-[10px] text-[#333] font-mono mt-2">Awaiting league data...</div>
+              <div className="text-xs text-[#555] font-mono">{league.platform?.toUpperCase()} · DYNASTY</div>
+              <div className="text-lg font-bold text-[#BF00FF] mt-1">{league.name}</div>
+              <div className="text-[10px] text-[#888] font-mono mt-2">
+                {league.teamCount} teams · ${league.entryFee} · {league.scoring?.format}
+              </div>
+              <div className="text-[10px] text-[#DFFF00] font-mono mt-2">
+                {league.draft?.status === 'pre-draft' ? 'STARTUP PRE-DRAFT' : league.draft?.status?.toUpperCase()}
+              </div>
             </div>
           ))}
         </div>

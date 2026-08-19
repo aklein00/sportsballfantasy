@@ -1,11 +1,30 @@
+import { isFootballLeague } from '../data/leagues.js';
+
+function formatDraftDate(league) {
+  if (!league?.draft?.date) return null;
+  const d = new Date(league.draft.date);
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase()
+    + ' · ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).toUpperCase();
+}
+
 export default function TopBar({ activeLeague, activeSection, playerData }) {
   const { loading, lastUpdated, error, refresh } = playerData || {};
+  const isFootball = activeLeague && isFootballLeague(activeLeague.id);
 
   const sectionLabels = {
     team:        'My Team',
-    draft:       'Draft War Room',
+    draft:       isFootball ? 'Startup Draft' : 'Draft War Room',
     freeagents:  'Free Agents',
+    connect:     'Sleeper Link',
   };
+
+  const draftLabel = isFootball
+    ? (activeLeague?.draft?.status === 'pre-draft' ? 'STARTUP' : 'DRAFT')
+    : 'DRAFT';
+
+  const draftDate = isFootball
+    ? formatDraftDate(activeLeague)
+    : 'MAR 7 · 3:00PM ET';
 
   return (
     <header className="h-16 border-b border-[#2a2a2a] bg-[#0a0a0a] flex items-center justify-between px-6 shrink-0">
@@ -25,6 +44,12 @@ export default function TopBar({ activeLeague, activeSection, playerData }) {
           <span className="text-[#BF00FF]">{activeLeague.name}</span>
           <span className="text-[#333] mx-1">›</span>
           <span className="text-[#DFFF00]">{sectionLabels[activeSection] || activeSection}</span>
+          {isFootball && (
+            <>
+              <span className="text-[#333] mx-1">·</span>
+              <span className="text-[#555]">{activeLeague.platform}</span>
+            </>
+          )}
         </div>
       )}
 
@@ -54,9 +79,11 @@ export default function TopBar({ activeLeague, activeSection, playerData }) {
             LIVE · {lastUpdated ? lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—'}
           </button>
         )}
-        <span className="hidden sm:inline">
-          DRAFT: <span className="text-[#DFFF00]">MAR 7 · 3:00PM ET</span>
-        </span>
+        {draftDate && (
+          <span className="hidden sm:inline">
+            {draftLabel}: <span className="text-[#DFFF00]">{draftDate}</span>
+          </span>
+        )}
       </div>
     </header>
   );
