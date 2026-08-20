@@ -1,6 +1,7 @@
 // Per-league football draft board — localStorage persistence, linear + snake formats
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { ALL_STARTUP_TARGETS, getFootballLeague } from '../data/footballLeagues.js';
+import { INDUSTRY_SEED_VERSION } from '../data/industryFootball.js';
 
 const STORAGE_PREFIX = 'sbf_football_draft_';
 
@@ -71,7 +72,10 @@ export function useFootballDraft(leagueId) {
     if (!leagueId || !league) return;
 
     const saved = loadState(leagueId);
-    if (saved) {
+    const seedVersion = league.getDraftSeed ? INDUSTRY_SEED_VERSION : null;
+    const savedStale = saved && seedVersion && saved.seedVersion !== seedVersion;
+
+    if (saved && !savedStale) {
       setCurrentPick(saved.currentPick ?? 1);
       setDraftLog(saved.draftLog ?? []);
       setMyRoster(saved.myRoster ?? league.myTeam?.roster ?? []);
@@ -83,7 +87,7 @@ export function useFootballDraft(leagueId) {
         setDraftLog(seed.draftLog);
         setMyRoster(seed.myRoster);
         setQueuedIds(seed.queuedIds);
-        saveState(leagueId, seed);
+        saveState(leagueId, { ...seed, seedVersion });
       }
     } else if (league.myTeam?.roster) {
       setMyRoster(league.myTeam.roster);

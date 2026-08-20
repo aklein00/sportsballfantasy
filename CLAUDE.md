@@ -261,7 +261,7 @@ All three leagues are **dynasty format** with **2026 startup drafts**. League ru
 
 **Roster:** QB×1, RB×2, WR×2, TE×1, FLEX×1, K×1 · Bench 12 · IR 2
 
-**2026 Rookie picks:** 1.08 KC Concepcion (WR), 2.08 Eli Stowers (TE) · Next pick: 3.08 (#40)
+**2026 Rookie picks:** 1.08 KC Concepcion (WR), 2.08 Eli Stowers (TE), 3.08 Chris Brazzell (WR, IR) · Next pick: 4.08 (#56)
 
 Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS screenshots.
 

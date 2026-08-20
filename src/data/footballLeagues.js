@@ -159,8 +159,8 @@ export const industryFootball = {
     rounds: 22,
     mySlot: 8,
     status: 'in_progress',
-    currentPick: 25,
-    myNextPick: 40,
+    currentPick: 41,
+    myNextPick: 56,
   },
   schedule: {
     seasonStart: '2026-09-10',
@@ -182,7 +182,7 @@ export const industryFootball = {
     {
       name: 'Rookie Draft',
       summary: '16-team linear rookie draft in progress. Same slot every round.',
-      detail: 'Scoundrels hold pick 1.08 (KC Concepcion) and 2.08 (Eli Stowers). Next pick: 3.08 (#40).',
+      detail: 'Scoundrels hold 1.08 (KC Concepcion), 2.08 (Eli Stowers), 3.08 (Chris Brazzell — IR). Next pick: 4.08 (#56).',
     },
   ],
 };

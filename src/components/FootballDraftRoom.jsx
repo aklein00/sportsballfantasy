@@ -84,7 +84,7 @@ export default function FootballDraftRoom({ leagueId }) {
           <div className="mt-3 px-3 py-2 bg-[#39FF14]/10 border border-[#39FF14]/30 text-[10px] font-mono text-[#39FF14]">
             LIVE DRAFT — {draftLog.length} picks made · Pick #{currentPick} on the board
             {league.draft?.myNextPick && (
-              <span className="text-[#888] ml-2">Your next: #{league.draft.myNextPick} (3.08)</span>
+              <span className="text-[#888] ml-2">Your next: #{league.draft.myNextPick} (4.08)</span>
             )}
           </div>
         )}
@@ -243,6 +243,7 @@ export default function FootballDraftRoom({ leagueId }) {
                   <span className="text-[#BF00FF] w-8">{p.positions?.[0]}</span>
                   <span className="text-[#DFFF00] flex-1 truncate">{p.name}</span>
                   <span className="text-[#555]">{p.draftPick || ''}</span>
+                  {p.status && <span className="text-[8px] text-[#FF006E]">{p.status}</span>}
                 </div>
               ))}
             </div>

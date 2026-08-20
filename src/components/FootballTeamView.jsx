@@ -23,6 +23,13 @@ function PlayerRow({ player, nflData }) {
       {player.rookie && (
         <span className="text-[8px] text-[#BF00FF] font-mono shrink-0">R</span>
       )}
+      {player.status && (
+        <span className="text-[8px] font-bold font-mono shrink-0" style={{
+          color: player.status === 'IR' ? '#FF006E' : player.status === 'PUP' ? '#DFFF00' : '#888',
+        }}>
+          {player.status}
+        </span>
+      )}
       {player.note && (
         <span className="text-[8px] text-[#555] font-mono shrink-0 truncate max-w-16" title={player.note}>{player.note}</span>
       )}

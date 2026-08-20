@@ -17,8 +17,8 @@ export const DRAFT = {
   rounds: 22,
   mySlot: 8,
   status: 'in_progress',
-  currentPick: 25,
-  myNextPick: 40,
+  currentPick: 41,
+  myNextPick: 56,
 };
 
 function teamName(slot) {
@@ -29,7 +29,23 @@ function player(id, name, positions, team, meta = {}) {
   return { id, name, positions: Array.isArray(positions) ? positions : [positions], team, ...meta };
 }
 
-// Rookie draft picks 1–24 (from CBS, as of 2026-08-19)
+// Rookie draft picks (CBS) — picks 25–39 TBD until logged; pick 40 confirmed 2026-08-20
+const PICKS_25_39 = Array.from({ length: 15 }, (_, i) => {
+  const overallPick = 25 + i;
+  const round = Math.ceil(overallPick / 16);
+  const pickInRound = ((overallPick - 1) % 16) + 1;
+  const slot = pickInRound;
+  return {
+    overallPick,
+    round,
+    pickInRound,
+    slot,
+    team: teamName(slot),
+    isMyPick: false,
+    player: player(`if-pick-${overallPick}-tbd`, '—', '—', '—', { tbd: true }),
+  };
+});
+
 export const DRAFT_PICKS = [
   { overallPick: 1,  round: 1, pickInRound: 1,  slot: 1,  team: teamName(1),  isMyPick: false, player: player('if-jeremiyah-love',      'Jeremiyah Love',      'RB', 'ARI') },
   { overallPick: 2,  round: 1, pickInRound: 2,  slot: 2,  team: teamName(2),  isMyPick: false, player: player('if-jadarian-price',      'Jadarian Price',      'RB', 'ND') },
@@ -55,6 +71,8 @@ export const DRAFT_PICKS = [
   { overallPick: 22, round: 2, pickInRound: 6,  slot: 6,  team: teamName(6),  isMyPick: false, player: player('if-antwain-randall',     'Antwain Randall',     'WR', 'RUT') },
   { overallPick: 23, round: 2, pickInRound: 7,  slot: 7,  team: teamName(7),  isMyPick: false, player: player('if-malachi-fields',      'Malachi Fields',      'WR', 'NYG') },
   { overallPick: 24, round: 2, pickInRound: 8,  slot: 8,  team: 'Scoundrels', isMyPick: true,  player: player('if-eli-stowers',         'Eli Stowers',         'TE', 'PHI', { draftPick: '2.08' }) },
+  ...PICKS_25_39,
+  { overallPick: 40, round: 3, pickInRound: 8,  slot: 8,  team: 'Scoundrels', isMyPick: true,  player: player('if-chris-brazzell',      'Chris Brazzell',      'WR', 'OKLA', { draftPick: '3.08', rookie: true, status: 'IR' }) },
 ];
 
 export const MY_TEAM = {
@@ -84,8 +102,13 @@ export const MY_TEAM = {
     player('if-noah-fant',     'Noah Fant',     'TE', 'CIN'),
     player('if-cole-kmet',     'Cole Kmet',     'TE', 'CHI'),
     player('if-irv-smith',     'Irv Smith Jr.', 'TE', 'HOU'),
+    // R3.08 — IR to open season
+    player('if-chris-brazzell', 'Chris Brazzell', 'WR', 'OKLA', { draftPick: '3.08', rookie: true, status: 'IR' }),
   ],
 };
+
+/** Bump when seed data changes so localStorage re-seeds */
+export const INDUSTRY_SEED_VERSION = 2;
 
 /** Seed draft board state for first visit (localStorage empty) */
 export function industryFootballDraftSeed() {
@@ -95,6 +118,7 @@ export function industryFootballDraftSeed() {
     draftLog: DRAFT_PICKS,
     myDraftPicks,
     myRoster: MY_TEAM.roster,
+    seedVersion: INDUSTRY_SEED_VERSION,
   };
 }
 
