@@ -1,6 +1,11 @@
 // NFL Dynasty Leagues — 2026 Startup Season
 // Structured league data for Californian Dynasty (Sleeper), Industry Football (CBS), Sports and Fun (CBS)
 
+import {
+  MY_TEAM as INDUSTRY_MY_TEAM,
+  industryFootballDraftSeed,
+  getIndustryTeamName,
+} from './industryFootball.js';
 export const californianDynasty = {
   id: 'californian-dynasty',
   name: 'Californian Dynasty',
@@ -95,15 +100,19 @@ export const industryFootball = {
   platform: 'CBS Sports',
   format: 'Dynasty',
   season: 2026,
-  status: 'startup',
+  status: 'in_progress',
   active: true,
   url: null,
   myTeam: {
-    name: 'TBD',
-    owner: 'Scribbles',
+    name: INDUSTRY_MY_TEAM.name,
+    owner: INDUSTRY_MY_TEAM.owner,
+    draftSlot: INDUSTRY_MY_TEAM.draftSlot,
+    roster: INDUSTRY_MY_TEAM.roster,
   },
-  teamCount: 14,
+  teamCount: 16,
   entryFee: 75,
+  getTeamName: getIndustryTeamName,
+  getDraftSeed: industryFootballDraftSeed,
   rosterLimits: {
     starters: { min: 8, max: 8 },
     bench: { min: 0, max: 12 },
@@ -143,13 +152,15 @@ export const industryFootball = {
     ],
   },
   draft: {
-    format: 'Startup Auction + Snake',
-    type: 'startup',
-    date: '2026-07-20T10:00:00-04:00',
-    rounds: 20,
-    order: 'Snake',
-    myPick: null,
-    status: 'pre-draft',
+    format: 'linear',
+    type: 'rookie',
+    date: '2026-08-19T10:00:00-04:00',
+    teamCount: 16,
+    rounds: 22,
+    mySlot: 8,
+    status: 'in_progress',
+    currentPick: 41,
+    myNextPick: 56,
   },
   schedule: {
     seasonStart: '2026-09-10',
@@ -169,9 +180,9 @@ export const industryFootball = {
       detail: 'Standard CBS PPR scoring with custom dynasty roster limits.',
     },
     {
-      name: 'Kicker Slot',
-      summary: 'One kicker slot in starting lineup.',
-      detail: 'K available in startup draft. Stream or roster anchor — your call.',
+      name: 'Rookie Draft',
+      summary: '16-team linear rookie draft in progress. Same slot every round.',
+      detail: 'Scoundrels hold 1.08 (KC Concepcion), 2.08 (Eli Stowers), 3.08 (Chris Brazzell — IR). Next pick: 4.08 (#56).',
     },
   ],
 };

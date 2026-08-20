@@ -12,10 +12,10 @@ import { useDraftState } from './hooks/useDraftState.js';
 import { usePlayerData } from './hooks/usePlayerData.js';
 import { useNflPlayerData } from './hooks/useNflPlayerData.js';
 import { useSleeperLeague } from './hooks/useSleeperLeague.js';
-import { useFootballDraftState } from './hooks/useFootballDraftState.js';
+import { useFootballDraft } from './hooks/useFootballDraft.js';
 
 function App() {
-  const [activeLeagueId, setActiveLeagueId]   = useState('blue-dream');
+  const [activeLeagueId, setActiveLeagueId]   = useState('californian-dynasty');
   const [activeSection,  setActiveSection]    = useState('team');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [rulesOpen, setRulesOpen]             = useState(false);
@@ -45,7 +45,7 @@ function App() {
   const draftState  = useDraftState();
   const playerData  = usePlayerData();
   const nflData     = useNflPlayerData();
-  const footballDraft = useFootballDraftState(isFootball ? activeLeagueId : null);
+  const footballDraft = useFootballDraft(isFootball ? activeLeagueId : null);
   const sleeperLeague = useSleeperLeague(
     sleeperConfig?.sleeperLeagueId || null,
     null

@@ -20,12 +20,18 @@ function PlayerRow({ player, nflData }) {
       {player.age != null && (
         <span className="text-[9px] text-[#444] font-mono shrink-0 w-8 text-right">{player.age}y</span>
       )}
-      {player.tier && (
-        <span className={`text-[8px] font-mono shrink-0 px-1 ${
-          player.tier === 1 ? 'text-[#DFFF00]' : 'text-[#BF00FF]'
-        }`}>
-          T{player.tier}
+      {player.rookie && (
+        <span className="text-[8px] text-[#BF00FF] font-mono shrink-0">R</span>
+      )}
+      {player.status && (
+        <span className="text-[8px] font-bold font-mono shrink-0" style={{
+          color: player.status === 'IR' ? '#FF006E' : player.status === 'PUP' ? '#DFFF00' : '#888',
+        }}>
+          {player.status}
         </span>
+      )}
+      {player.note && (
+        <span className="text-[8px] text-[#555] font-mono shrink-0 truncate max-w-16" title={player.note}>{player.note}</span>
       )}
     </div>
   );
@@ -55,7 +61,7 @@ export default function FootballTeamView({ leagueId, myRoster = [], sleeperRoste
 
   const roster = sleeperRoster?.players?.length
     ? sleeperRoster.players
-    : myRoster;
+    : (league.myTeam?.roster?.length ? league.myTeam.roster : myRoster);
 
   const starters = sleeperRoster?.starters?.length
     ? sleeperRoster.starters
@@ -72,11 +78,20 @@ export default function FootballTeamView({ leagueId, myRoster = [], sleeperRoste
           {league.format?.toUpperCase()} · {league.platform?.toUpperCase()}
         </div>
         <h2 className="text-2xl font-black text-[#DFFF00] uppercase" style={{ letterSpacing: '-0.03em' }}>
-          {league.name}
+          {league.myTeam?.name || league.name}
         </h2>
         <div className="text-xs text-[#555] font-mono mt-1">
+          {league.myTeam?.owner && <span>{league.myTeam.owner} · </span>}
           {league.teamCount} Teams · {league.scoring?.format} · Season {league.season}
+          {league.myTeam?.draftSlot && (
+            <span> · Draft slot #{league.myTeam.draftSlot}</span>
+          )}
         </div>
+        {league.draft?.status === 'in_progress' && (
+          <div className="mt-3 inline-block px-3 py-1 text-[10px] font-mono font-bold text-[#39FF14] border border-[#39FF14]/40 bg-[#39FF14]/5 tracking-widest">
+            ROOKIE DRAFT IN PROGRESS · PICK #{league.draft.currentPick}
+          </div>
+        )}
         {league.draft?.status === 'pre-draft' && (
           <div className="mt-3 inline-block px-3 py-1 text-[10px] font-mono font-bold text-[#DFFF00] border border-[#DFFF00]/40 bg-[#DFFF00]/5 tracking-widest">
             STARTUP DRAFT — PRE-DRAFT
