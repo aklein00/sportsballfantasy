@@ -284,7 +284,9 @@ Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS
 
 **Current roster (CBS screenshots):** Geno Smith · Jerome Ford, Najee Harris, Rhamondre Stevenson · Garrett Wilson, Jayden Reed, Cedric Tillman, Tre Tucker, Christian Kirk, Joshua Palmer, KaVontae Turpin · Dalton Kincaid, Dawson Knox
 
-**Needs at 1.05:** QB2 (Superflex — only Geno) or young RB. WR/TE already have dynasty cores (G. Wilson, Kincaid).
+**2026 rookie draft (on the clock at 1.05):** Taken (slot order unconfirmed) — Jeremiyah Love, Jadarian Price, Carnell Tate, Mike Washington Jr.
+
+**1.05 lean (no scoring assumed):** Jordyn Tyson, then Makai Lemon. Pass Sadiq (Kincaid already). Mendoza only if this league starts two QBs (unknown). Coleman is the next RB — roster need is real, talent drop vs Tyson/Lemon is also real.
 
 Roster seeded from `src/data/sportsAndFun.js`.
 

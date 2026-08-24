@@ -118,11 +118,12 @@ export function useFootballDraft(leagueId) {
   const takenNames = useMemo(() => new Set(draftLog.map(d => d.player?.name?.toLowerCase())), [draftLog]);
 
   const available = useMemo(() => {
-    const pool = league?.draft?.status === 'in_progress'
-      ? ALL_STARTUP_TARGETS.filter(p => !takenNames.has(p.name.toLowerCase()))
-      : ALL_STARTUP_TARGETS.filter(p => !takenIds.has(p.id));
-    return pool;
-  }, [takenIds, takenNames, league?.draft?.status]);
+    const source = league?.getAvailablePool?.() || ALL_STARTUP_TARGETS;
+    if (league?.draft?.status === 'in_progress') {
+      return source.filter(p => !takenNames.has(p.name.toLowerCase()));
+    }
+    return source.filter(p => !takenIds.has(p.id));
+  }, [takenIds, takenNames, league]);
 
   const isMyTurn = pickSlot(currentPick, totalTeams, order) === myPick;
 

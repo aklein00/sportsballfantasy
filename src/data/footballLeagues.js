@@ -10,6 +10,8 @@ import {
   MY_TEAM as SAF_MY_TEAM,
   sportsAndFunDraftSeed,
   getSportsAndFunTeamName,
+  getSportsAndFunRookiePool,
+  PICK_COMPARISON as SAF_PICK_COMPARISON,
   SPORTS_AND_FUN_SEED_VERSION,
 } from './sportsAndFun.js';
 
@@ -216,6 +218,8 @@ export const sportsAndFun = {
   entryFee: 100,
   getTeamName: getSportsAndFunTeamName,
   getDraftSeed: sportsAndFunDraftSeed,
+  getAvailablePool: getSportsAndFunRookiePool,
+  pickComparison: SAF_PICK_COMPARISON,
   rosterLimits: {
     starters: { min: 9, max: 9 },
     bench: { min: 0, max: 10 },
@@ -276,14 +280,9 @@ export const sportsAndFun = {
       detail: 'Startup draft establishes initial rosters. Commissioner sets constitution on CBS.',
     },
     {
-      name: 'Superflex + WR Premium',
-      summary: 'QB scarcity + three starting WR slots.',
-      detail: 'Only Geno Smith at QB — Superflex makes a second QB (or elite young skill) the top need at 1.05.',
-    },
-    {
       name: 'Rookie Draft',
-      summary: '10-team snake. Scribbles hold slot #5 — on the clock at 1.05.',
-      detail: 'Roster seeded from CBS screenshots. Core: Garrett Wilson, Dalton Kincaid, Jayden Reed. Gaps: QB2, young RB.',
+      summary: '10-team snake. Slot #5 — on the clock at 1.05.',
+      detail: 'Taken (order unconfirmed): Jeremiyah Love, Jadarian Price, Carnell Tate, Mike Washington Jr. Lean at 1.05: Jordyn Tyson, then Makai Lemon. Scoring not confirmed by owner — do not invent it.',
     },
   ],
 };

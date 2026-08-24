@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useFootballDraft } from '../hooks/useFootballDraft.js';
 import { useNflPlayerData } from '../hooks/useNflPlayerData.js';
+import RookiePickComparison from './RookiePickComparison.jsx';
 
 const TIER_COLORS = {
   1: 'text-[#DFFF00] bg-[#DFFF00]/10',
@@ -84,7 +85,7 @@ export default function FootballDraftRoom({ leagueId }) {
           <div className="mt-3 px-3 py-2 bg-[#39FF14]/10 border border-[#39FF14]/30 text-[10px] font-mono text-[#39FF14]">
             LIVE DRAFT — {draftLog.length} picks made · Pick #{currentPick} on the board
             {league.draft?.myNextPick && (
-              <span className="text-[#888] ml-2">Your next: #{league.draft.myNextPick} (4.08)</span>
+              <span className="text-[#888] ml-2">Your next: #{league.draft.myNextPick}</span>
             )}
           </div>
         )}
@@ -139,7 +140,10 @@ export default function FootballDraftRoom({ leagueId }) {
 
           {isInProgress ? (
             <div className="flex-1 overflow-y-auto">
-              <div className="px-3 py-2 bg-[#111] border-b border-[#1a1a1a] sticky top-0">
+              {league.pickComparison && (
+                <RookiePickComparison comparison={league.pickComparison} />
+              )}
+              <div className="px-3 py-2 bg-[#111] border-b border-[#1a1a1a] sticky top-0 z-10">
                 <span className="text-[10px] text-[#DFFF00] font-mono tracking-widest">DRAFT BOARD · PICKS 1–{draftLog.length}</span>
               </div>
               {draftLog.map(entry => (
@@ -162,6 +166,27 @@ export default function FootballDraftRoom({ leagueId }) {
               <div className="px-3 py-2 border-t border-[#BF00FF]/30 bg-[#BF00FF]/5 text-[10px] font-mono text-[#BF00FF]">
                 → ON THE CLOCK: {getPickOwner(currentPick)} (Pick #{currentPick})
               </div>
+              {available.length > 0 && (
+                <>
+                  <div className="px-3 py-2 bg-[#111] border-b border-[#1a1a1a]">
+                    <span className="text-[10px] text-[#888] font-mono tracking-widest">STILL ON THE BOARD</span>
+                  </div>
+                  {available.map(player => (
+                    <div
+                      key={player.id}
+                      className="flex items-center gap-2 px-3 py-1.5 border-b border-[#1a1a1a] text-xs font-mono"
+                    >
+                      <span className="text-[#444] w-8">{player.ecr ? `#${player.ecr}` : '—'}</span>
+                      <span className="text-[#DFFF00] w-8">{player.positions?.[0]}</span>
+                      <span className="text-white flex-1 truncate">{player.name}</span>
+                      <span className="text-[#555] w-10">{player.team}</span>
+                      {player.verdict && (
+                        <span className="text-[8px] text-[#888] font-bold">{player.verdict}</span>
+                      )}
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           ) : (
             <div className="flex-1 overflow-y-auto">
