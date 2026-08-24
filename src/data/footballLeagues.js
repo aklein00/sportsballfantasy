@@ -222,17 +222,15 @@ export const sportsAndFun = {
   pickComparison: SAF_PICK_COMPARISON,
   rosterLimits: {
     starters: { min: 9, max: 9 },
-    bench: { min: 0, max: 10 },
-    ir: { min: 0, max: 3 },
-    total: { min: 9, max: 22 },
   },
   starterSlots: [
     { slot: 'QB', count: 1, label: 'Quarterback' },
     { slot: 'RB', count: 2, label: 'Running Back' },
-    { slot: 'WR', count: 3, label: 'Wide Receiver' },
+    { slot: 'WR', count: 2, label: 'Wide Receiver' },
     { slot: 'TE', count: 1, label: 'Tight End' },
-    { slot: 'FLEX', count: 1, label: 'RB/WR/TE Flex' },
-    { slot: 'SUPERFLEX', count: 1, label: 'Superflex (QB eligible)' },
+    { slot: 'RWT', count: 1, label: 'RB/WR/TE Flex' },
+    { slot: 'K', count: 1, label: 'Kicker' },
+    { slot: 'DST', count: 1, label: 'Defense / ST' },
   ],
   scoring: null,
   draft: {
@@ -262,7 +260,7 @@ export const sportsAndFun = {
     {
       name: 'Rookie Draft',
       summary: '10-team snake. Slot #5 — on the clock at 1.05.',
-      detail: 'Taken (order unconfirmed): Jeremiyah Love, Jadarian Price, Carnell Tate, Mike Washington Jr. Lean at 1.05: Jordyn Tyson, then Makai Lemon. Scoring not confirmed by owner — do not invent it.',
+      detail: 'Taken (order unconfirmed): Jeremiyah Love, Jadarian Price, Carnell Tate, Mike Washington Jr. Lean at 1.05: Jordyn Tyson, then Makai Lemon. Roster is the three CBS screenshots only (Chase/Stroud/Hall starters + bench). Scoring not confirmed.',
     },
   ],
 };
