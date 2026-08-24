@@ -6,6 +6,15 @@ import {
   industryFootballDraftSeed,
   getIndustryTeamName,
 } from './industryFootball.js';
+import {
+  MY_TEAM as SAF_MY_TEAM,
+  sportsAndFunDraftSeed,
+  getSportsAndFunTeamName,
+  SPORTS_AND_FUN_SEED_VERSION,
+} from './sportsAndFun.js';
+
+export { SPORTS_AND_FUN_SEED_VERSION };
+
 export const californianDynasty = {
   id: 'californian-dynasty',
   name: 'Californian Dynasty',
@@ -194,15 +203,19 @@ export const sportsAndFun = {
   platform: 'CBS Sports',
   format: 'Dynasty',
   season: 2026,
-  status: 'startup',
+  status: 'in_progress',
   active: true,
   url: null,
   myTeam: {
-    name: 'TBD',
-    owner: 'Scribbles',
+    name: SAF_MY_TEAM.name,
+    owner: SAF_MY_TEAM.owner,
+    draftSlot: SAF_MY_TEAM.draftSlot,
+    roster: SAF_MY_TEAM.roster,
   },
   teamCount: 10,
   entryFee: 100,
+  getTeamName: getSportsAndFunTeamName,
+  getDraftSeed: sportsAndFunDraftSeed,
   rosterLimits: {
     starters: { min: 9, max: 9 },
     bench: { min: 0, max: 10 },
@@ -239,13 +252,16 @@ export const sportsAndFun = {
     ],
   },
   draft: {
-    format: 'Startup Snake',
-    type: 'startup',
+    format: 'snake',
+    type: 'rookie',
     date: '2026-08-01T14:00:00-04:00',
+    teamCount: 10,
     rounds: 22,
     order: 'Snake',
-    myPick: null,
-    status: 'pre-draft',
+    mySlot: 5,
+    status: 'in_progress',
+    currentPick: 5,
+    myNextPick: 5,
   },
   schedule: {
     seasonStart: '2026-09-10',
@@ -260,14 +276,14 @@ export const sportsAndFun = {
       detail: 'Startup draft establishes initial rosters. Commissioner sets constitution on CBS.',
     },
     {
-      name: 'WR Premium',
-      summary: 'Three starting WR slots — depth matters.',
-      detail: 'Build WR corps early in startup. Superflex adds QB scarcity premium.',
+      name: 'Superflex + WR Premium',
+      summary: 'QB scarcity + three starting WR slots.',
+      detail: 'Only Geno Smith at QB — Superflex makes a second QB (or elite young skill) the top need at 1.05.',
     },
     {
-      name: 'Entry Fee',
-      summary: '$100 buy-in. Payout structure TBD by league vote.',
-      detail: '10-team league. Payouts set at draft or season start.',
+      name: 'Rookie Draft',
+      summary: '10-team snake. Scribbles hold slot #5 — on the clock at 1.05.',
+      detail: 'Roster seeded from CBS screenshots. Core: Garrett Wilson, Dalton Kincaid, Jayden Reed. Gaps: QB2, young RB.',
     },
   ],
 };
