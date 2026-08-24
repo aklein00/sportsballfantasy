@@ -260,7 +260,7 @@ export const sportsAndFun = {
     {
       name: 'Rookie Draft',
       summary: '10-team snake. Slot #5 — on the clock at 1.05.',
-      detail: 'Taken (order unconfirmed): Jeremiyah Love, Jadarian Price, Carnell Tate, Mike Washington Jr. Lean at 1.05: Jordyn Tyson, then Makai Lemon. Roster is the three CBS screenshots only (Chase/Stroud/Hall starters + bench). Scoring not confirmed.',
+      detail: 'Taken (order unconfirmed): Jeremiyah Love, Jadarian Price, Carnell Tate, Mike Washington Jr. Lean: Tyson at 1.05, Coleman at 2.06. Roster is the three CBS screenshots only. Scoring not confirmed.',
     },
   ],
 };

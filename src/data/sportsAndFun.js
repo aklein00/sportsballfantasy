@@ -100,7 +100,7 @@ export const REMAINING_BOARD = [
   player('saf-jordyn-tyson', 'Jordyn Tyson', 'WR', 'NO', {
     ecr: 3,
     verdict: 'TAKE',
-    why: 'Best remaining prospect. You already have Chase and G. Wilson — this is BPA, not a WR-need pick.',
+    why: 'Best remaining player. Take him at 1.05. The young RB comes at 2.06 (#16).',
   }),
   player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', {
     ecr: 4,
@@ -134,13 +134,13 @@ export const REMAINING_BOARD = [
   }),
   player('saf-jonah-coleman', 'Jonah Coleman', 'RB', 'DEN', {
     ecr: 12,
-    verdict: 'PASS',
-    why: 'You already have Breece Hall plus Etienne/Stevenson. Remaining RBs are a tier down from Tyson/Lemon.',
+    verdict: 'NEXT PICK',
+    why: 'The young RB behind Hall. Love/Price/Washington are gone — Coleman is ~12th, not 5th. Queue him for 2.06 (#16).',
   }),
   player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', {
     ecr: 15,
-    verdict: 'LATER',
-    why: 'RB4 of the class. Not 1.05 with Hall already on the roster.',
+    verdict: '2.06 BACKUP',
+    why: 'RB4 of the class. Backup plan at #16 if Coleman is gone.',
   }),
 ];
 
@@ -152,10 +152,10 @@ export const PICK_COMPARISON = {
     name: 'Jordyn Tyson',
     positions: ['WR'],
     team: 'NO',
-    line: 'Hit commit on Tyson. Your core is Chase, G. Wilson, Stroud, Hall — 1.05 is BPA, not a hole. Lemon if Tyson is gone.',
+    line: 'Tyson now. Coleman at 2.06. Hall is your RB1; Etienne/Stevenson/Najee/Ford are this year, not the future. Love and Price are gone — do not pay 1.05 for the RB3.',
   },
   candidates: REMAINING_BOARD.filter(p =>
-    ['Jordyn Tyson', 'Makai Lemon', 'Kenyon Sadiq', 'Fernando Mendoza', 'Jonah Coleman'].includes(p.name)
+    ['Jordyn Tyson', 'Makai Lemon', 'Jonah Coleman', 'Nicholas Singleton', 'Kenyon Sadiq'].includes(p.name)
   ),
 };
 

@@ -288,7 +288,7 @@ Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS
 
 **2026 rookie draft (on the clock at 1.05):** Taken (slot order unconfirmed) — Jeremiyah Love, Jadarian Price, Carnell Tate, Mike Washington Jr.
 
-**1.05 lean (no scoring assumed):** Jordyn Tyson, then Makai Lemon. This is BPA on a Chase / G. Wilson / Stroud / Hall roster — not a need pick. Pass Sadiq (Kincaid + Juwan). Pass Mendoza (Stroud + Geno). Pass Coleman (Hall already).
+**1.05 lean (no scoring assumed):** Jordyn Tyson now, Jonah Coleman at 2.06 (#16). RB youth behind Hall is a real hole (Etienne/Najee/Stevenson/Ford), but Love/Price/Washington are gone — Coleman is ~12th overall, not 5th. Lemon if Tyson is gone. Pass Sadiq (Kincaid + Juwan). Pass Mendoza (Stroud + Geno).
 
 Roster seeded from `src/data/sportsAndFun.js`.
 
