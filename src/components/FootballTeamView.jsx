@@ -82,7 +82,9 @@ export default function FootballTeamView({ leagueId, myRoster = [], sleeperRoste
         </h2>
         <div className="text-xs text-[#555] font-mono mt-1">
           {league.myTeam?.owner && <span>{league.myTeam.owner} · </span>}
-          {league.teamCount} Teams · {league.scoring?.format} · Season {league.season}
+          {league.teamCount} Teams
+          {league.scoring?.format ? ` · ${league.scoring.format}` : ''}
+          {' · '}Season {league.season}
           {league.myTeam?.draftSlot && (
             <span> · Draft slot #{league.myTeam.draftSlot}</span>
           )}

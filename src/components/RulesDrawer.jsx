@@ -165,6 +165,13 @@ function FootballRulesContent({ league, section }) {
 
   if (section === 'scoring') {
     const scoring = league.scoring || {};
+    if (!league.scoring) {
+      return (
+        <div className="text-xs font-mono text-[#888]">
+          Scoring not confirmed for this league.
+        </div>
+      );
+    }
     return (
       <div className="space-y-4">
         <div className="bg-[#1a1a1a] p-3 text-xs font-mono text-[#BF00FF]">

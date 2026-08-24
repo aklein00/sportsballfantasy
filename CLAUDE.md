@@ -272,15 +272,15 @@ Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS
 | Setting | Value |
 |---------|-------|
 | Platform | CBS Sports |
-| Format | Dynasty Superflex |
+| Format | Dynasty |
 | Teams | 10 |
 | Entry Fee | $100 |
-| Scoring | Half-PPR |
+| Scoring | Not confirmed |
 | Rookie Draft | In progress (Aug 2026) |
 | Format | Snake |
 | Rounds | 22 |
 
-**Roster:** QB×1, RB×2, WR×3, TE×1, FLEX×1, SUPERFLEX×1 · Bench 10 · IR 3
+**Roster construction:** Not confirmed beyond the CBS screenshots (QB, two RBs, several WRs, TEs, RWT flex).
 
 **Current roster (CBS screenshots):** Geno Smith · Jerome Ford, Najee Harris, Rhamondre Stevenson · Garrett Wilson, Jayden Reed, Cedric Tillman, Tre Tucker, Christian Kirk, Joshua Palmer, KaVontae Turpin · Dalton Kincaid, Dawson Knox
 

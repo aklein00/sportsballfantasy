@@ -234,27 +234,7 @@ export const sportsAndFun = {
     { slot: 'FLEX', count: 1, label: 'RB/WR/TE Flex' },
     { slot: 'SUPERFLEX', count: 1, label: 'Superflex (QB eligible)' },
   ],
-  scoring: {
-    format: 'Half-PPR Dynasty',
-    passing: [
-      { stat: 'PASS_YDS', label: 'Passing Yards', ptsPer: 0.04 },
-      { stat: 'PASS_TD', label: 'Passing TD', ptsPer: 4 },
-      { stat: 'INT', label: 'Interception', ptsPer: -2 },
-    ],
-    rushing: [
-      { stat: 'RUSH_YDS', label: 'Rushing Yards', ptsPer: 0.1 },
-      { stat: 'RUSH_TD', label: 'Rushing TD', ptsPer: 6 },
-    ],
-    receiving: [
-      { stat: 'REC', label: 'Reception (Half-PPR)', ptsPer: 0.5 },
-      { stat: 'REC_YDS', label: 'Receiving Yards', ptsPer: 0.1 },
-      { stat: 'REC_TD', label: 'Receiving TD', ptsPer: 6 },
-    ],
-    misc: [
-      { stat: 'FUM_LOST', label: 'Fumble Lost', ptsPer: -2 },
-      { stat: '2PT', label: '2-Point Conversion', ptsPer: 2 },
-    ],
-  },
+  scoring: null,
   draft: {
     format: 'snake',
     type: 'rookie',
