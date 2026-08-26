@@ -1,7 +1,7 @@
 // Sports and Fun — CBS Sports Dynasty
-// Roster = ONLY the players in the three CBS screenshots (2026-08-24).
-// Image 1 = Active Players. Images 2–3 = rest of the roster (not a different team).
-// Scoring not confirmed by the owner — do not invent it.
+// Roster = ONLY the players in the three CBS screenshots, plus 1.05 Makai Lemon.
+// Draft board from CBS screenshots (picks 5–19). Picks 1–4 named by owner, order unconfirmed.
+// Evidence from the board: 16 teams, linear (1.05 then 2.05). Scoring not confirmed.
 
 export const LEAGUE = {
   id: 'sports-and-fun',
@@ -9,31 +9,61 @@ export const LEAGUE = {
   platform: 'CBS Sports',
   format: 'Dynasty',
   season: 2026,
-  teamCount: 10,
+  teamCount: 16,
 };
 
 export const DRAFT = {
-  format: 'snake',
+  format: 'linear',
   type: 'rookie',
-  teamCount: 10,
+  teamCount: 16,
   rounds: 22,
   mySlot: 5,
   status: 'in_progress',
-  currentPick: 5,
-  myNextPick: 5,
+  currentPick: 20,
+  myNextPick: 21,
 };
 
-const TEAM_NAME = 'the sports and fun team';
+const TEAM_NAME = 'Scribbles';
+
+const TEAM_BY_SLOT = {
+  5: 'Scribbles',
+  6: 'FREEBIRDS',
+  7: 'New York Andre the...',
+  8: 'Pip Fontaine',
+  9: 'Joan Nico Collins',
+  10: 'Todd Hartwig',
+  11: 'Goodfellas',
+  12: 'Team Topher',
+  13: 'Krazy Killah Donutz!',
+  14: 'TeSlaa On Fire',
+  15: 'Under Construction',
+  16: 'BB and the Starfish',
+};
 
 function teamName(slot) {
-  return slot === 5 ? TEAM_NAME : `Team ${slot}`;
+  return TEAM_BY_SLOT[slot] || `Team ${slot}`;
 }
 
 function player(id, name, positions, team, meta = {}) {
   return { id, name, positions: Array.isArray(positions) ? positions : [positions], team, ...meta };
 }
 
-// Screenshot 1 — Active Players (starters). Teams/slots as shown on CBS.
+function pick(overallPick, team, p, extra = {}) {
+  const round = Math.ceil(overallPick / 16);
+  const pickInRound = ((overallPick - 1) % 16) + 1;
+  return {
+    overallPick,
+    round,
+    pickInRound,
+    slot: pickInRound,
+    team,
+    isMyPick: team === TEAM_NAME,
+    player: p,
+    ...extra,
+  };
+}
+
+// Screenshot 1 — Active Players (starters).
 const ACTIVE = [
   player('saf-cj-stroud', 'C.J. Stroud', 'QB', 'HOU', { active: true, slot: 'QB', proj: 310.8 }),
   player('saf-travis-etienne', 'Travis Etienne', 'RB', 'NO', { active: true, slot: 'RB', proj: 173.1 }),
@@ -46,7 +76,6 @@ const ACTIVE = [
   player('saf-commanders', 'Commanders', 'DST', 'WAS', { active: true, slot: 'DST', proj: 138.0 }),
 ];
 
-// Screenshots 2–3 — continuation of the same roster (bench / remaining names).
 const REST = [
   player('saf-geno-smith', 'Geno Smith', 'QB', 'NYJ', { active: false, slot: 'QB', proj: 248.7 }),
   player('saf-jerome-ford', 'Jerome Ford', 'RB', 'WAS', { active: false, slot: 'RB', proj: 19.0, status: 'Q' }),
@@ -61,6 +90,7 @@ const REST = [
   player('saf-joshua-palmer', 'Joshua Palmer', 'WR', 'BUF', { active: false, slot: 'RWT', proj: 51.1 }),
   player('saf-rhamondre-stevenson', 'Rhamondre Stevenson', 'RB', 'NE', { active: false, slot: 'RWT', proj: 133.1 }),
   player('saf-garrett-wilson', 'Garrett Wilson', 'WR', 'NYJ', { active: false, slot: 'RWT', proj: 139.3 }),
+  player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', { active: false, slot: 'BN', rookie: true, draftPick: '1.05' }),
 ];
 
 export const MY_TEAM = {
@@ -70,103 +100,95 @@ export const MY_TEAM = {
   roster: [...ACTIVE, ...REST],
 };
 
-// Owner reported these four rookies already off the board. Exact 1.01–1.04
-// slot order was not given — ADP order used only so the log has four rows.
-// "Jordan Love" mapped to Jeremiyah Love (2026 RB).
-// "M. Washington" mapped to Mike Washington Jr. (RB, LV).
-export const TAKEN_ROOKIES = [
-  player('saf-jeremiyah-love', 'Jeremiyah Love', 'RB', 'ARI'),
-  player('saf-jadarian-price', 'Jadarian Price', 'RB', 'SEA'),
-  player('saf-carnell-tate', 'Carnell Tate', 'WR', 'TEN'),
-  player('saf-mike-washington', 'Mike Washington Jr.', 'RB', 'LV'),
+export const DRAFT_PICKS = [
+  // 1.01–1.04: owner said these four were gone before 1.05. Slot order unconfirmed.
+  pick(1, teamName(1), player('saf-jeremiyah-love', 'Jeremiyah Love', 'RB', 'ARI'), { orderUnconfirmed: true }),
+  pick(2, teamName(2), player('saf-jadarian-price', 'Jadarian Price', 'RB', 'SEA'), { orderUnconfirmed: true }),
+  pick(3, teamName(3), player('saf-carnell-tate', 'Carnell Tate', 'WR', 'TEN'), { orderUnconfirmed: true }),
+  pick(4, teamName(4), player('saf-mike-washington', 'Mike Washington Jr.', 'RB', 'LV'), { orderUnconfirmed: true }),
+  // 1.05–1.16 and 2.01–2.03 from CBS draft-board screenshots
+  pick(5, 'Scribbles', player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', { draftPick: '1.05' })),
+  pick(6, 'FREEBIRDS', player('saf-fernando-mendoza', 'Fernando Mendoza', 'QB', 'LV')),
+  pick(7, 'New York Andre the...', player('saf-malachi-fields', 'Malachi Fields', 'WR', 'NYG')),
+  pick(8, 'Pip Fontaine', player('saf-kenyon-sadiq', 'Kenyon Sadiq', 'TE', 'NYJ')),
+  pick(9, 'Joan Nico Collins', player('saf-jordyn-tyson', 'Jordyn Tyson', 'WR', 'NO')),
+  pick(10, 'Todd Hartwig', player('saf-dezhaun-stribling', "De'Zhaun Stribling", 'WR', 'SF')),
+  pick(11, 'Goodfellas', player('saf-kc-concepcion', 'KC Concepcion', 'WR', 'CLE')),
+  pick(12, 'Team Topher', player('saf-kaelon-black', 'Kaelon Black', 'RB', 'SF')),
+  pick(13, 'Krazy Killah Donutz!', player('saf-jakobi-lane', "Ja'Kobi Lane", 'WR', 'BAL')),
+  pick(14, 'TeSlaa On Fire', player('saf-denzel-boston', 'Denzel Boston', 'WR', 'CLE')),
+  pick(15, 'Under Construction', player('saf-kaytron-allen', 'Kaytron Allen', 'RB', 'WAS')),
+  pick(16, 'BB and the Starfish', player('saf-adam-randall', 'Adam Randall', 'RB', 'BAL')),
+  pick(17, 'FREEBIRDS', player('saf-jonah-coleman', 'Jonah Coleman', 'RB', 'DEN')),
+  pick(18, 'FREEBIRDS', player('saf-ty-simpson', 'Ty Simpson', 'QB', 'LAR')),
+  pick(19, 'LLESSUR REMLAP', player('saf-d-stevens', 'D. Stevens', 'K', 'WAS')),
 ];
 
-export const DRAFT_PICKS = TAKEN_ROOKIES.map((p, i) => {
-  const overallPick = i + 1;
-  return {
-    overallPick,
-    round: 1,
-    pickInRound: overallPick,
-    slot: overallPick,
-    team: teamName(overallPick),
-    isMyPick: false,
-    player: p,
-    orderUnconfirmed: true,
-  };
-});
-
-// Remaining names at 1.05 — ranked by 2026 dynasty rookie consensus, not league scoring.
+// Still on the board at 2.05 (pick 21). 2.04 (#20) has not been logged.
 export const REMAINING_BOARD = [
-  player('saf-jordyn-tyson', 'Jordyn Tyson', 'WR', 'NO', {
-    ecr: 3,
+  player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', {
+    ecr: 15,
     verdict: 'TAKE',
-    why: 'Best remaining player. Take him at 1.05. The young RB comes at 2.06 (#16).',
-  }),
-  player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', {
-    ecr: 4,
-    verdict: 'CLOSE 2ND',
-    why: 'Same tier as Tyson. First-round capital; PHI is more crowded.',
-  }),
-  player('saf-kc-concepcion', 'KC Concepcion', 'WR', 'CLE', {
-    ecr: 5,
-    verdict: 'LATER',
-    why: 'Next WR down. You are already loaded at WR (Chase, G. Wilson, Pittman, Reed).',
-  }),
-  player('saf-kenyon-sadiq', 'Kenyon Sadiq', 'TE', 'NYJ', {
-    ecr: 7,
-    verdict: 'PASS',
-    why: 'Class TE1, but you already have Kincaid and Juwan Johnson.',
+    why: 'Best remaining RB. You took WR at 1.05. Hall needs a young partner; Coleman/Allen/Black/Randall are gone.',
   }),
   player('saf-omar-cooper', 'Omar Cooper Jr.', 'WR', 'NYJ', {
     ecr: 8,
-    verdict: 'LATER',
-    why: 'Not 1.05 over Tyson/Lemon on a Chase / G. Wilson roster.',
+    verdict: 'STEAL',
+    why: 'Best player left (consensus ~8). Only take him if you refuse to force the RB. You already have Chase, G. Wilson, Lemon.',
   }),
-  player('saf-fernando-mendoza', 'Fernando Mendoza', 'QB', 'LV', {
-    ecr: 9,
+  player('saf-emmett-johnson', 'Emmett Johnson', 'RB', 'KC', {
+    ecr: 17,
+    verdict: 'IF SINGLETON GONE',
+    why: 'Next RB. Chiefs RB2 behind Walker. Take him if #20 grabs Singleton.',
+  }),
+  player('saf-eli-stowers', 'Eli Stowers', 'TE', 'PHI', {
+    ecr: 11,
     verdict: 'PASS',
-    why: 'You already have C.J. Stroud plus Geno. Do not spend 1.05 on QB.',
+    why: 'Value TE, but you already have Kincaid and Juwan Johnson.',
   }),
-  player('saf-denzel-boston', 'Denzel Boston', 'WR', 'CLE', {
-    ecr: 10,
+  player('saf-antonio-williams', 'Antonio Williams', 'WR', 'WAS', {
+    ecr: 13,
+    verdict: 'PASS',
+    why: 'More WR. You just took Lemon.',
+  }),
+  player('saf-chris-bell', 'Chris Bell', 'WR', 'MIA', {
+    ecr: 14,
     verdict: 'LATER',
-    why: 'Fine later. Not this pick.',
+    why: 'Fine in round 3. Not 2.05.',
   }),
-  player('saf-jonah-coleman', 'Jonah Coleman', 'RB', 'DEN', {
-    ecr: 12,
-    verdict: 'NEXT PICK',
-    why: 'The young RB behind Hall. Love/Price/Washington are gone — Coleman is ~12th, not 5th. Queue him for 2.06 (#16).',
+  player('saf-germie-bernard', 'Germie Bernard', 'WR', 'PIT', {
+    ecr: 16,
+    verdict: 'LATER',
+    why: 'Round-3 WR. Pass at 2.05.',
   }),
-  player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', {
-    ecr: 15,
-    verdict: '2.06 BACKUP',
-    why: 'RB4 of the class. Backup plan at #16 if Coleman is gone.',
+  player('saf-demond-claiborne', 'Demond Claiborne', 'RB', 'MIN', {
+    ecr: 28,
+    verdict: 'LATER',
+    why: 'Depth RB. Only if Singleton and Johnson are both gone.',
   }),
 ];
 
 export const PICK_COMPARISON = {
-  overallPick: 5,
+  overallPick: 21,
   takenOrderUnconfirmed: true,
-  taken: TAKEN_ROOKIES,
   recommendation: {
-    name: 'Jordyn Tyson',
-    positions: ['WR'],
-    team: 'NO',
-    line: 'Tyson now. Coleman at 2.06. Hall is your RB1; Etienne/Stevenson/Najee/Ford are this year, not the future. Love and Price are gone — do not pay 1.05 for the RB3.',
+    name: 'Nicholas Singleton',
+    positions: ['RB'],
+    team: 'TEN',
+    line: 'Take Singleton. You already got Lemon. Coleman is gone — this is the RB. Cooper is the leftover first-round WR if you will not force it.',
   },
   candidates: REMAINING_BOARD.filter(p =>
-    ['Jordyn Tyson', 'Makai Lemon', 'Jonah Coleman', 'Nicholas Singleton', 'Kenyon Sadiq'].includes(p.name)
+    ['Nicholas Singleton', 'Omar Cooper Jr.', 'Emmett Johnson', 'Eli Stowers'].includes(p.name)
   ),
 };
 
-/** Bump when seed data changes so localStorage re-seeds */
-export const SPORTS_AND_FUN_SEED_VERSION = 3;
+export const SPORTS_AND_FUN_SEED_VERSION = 4;
 
 export function sportsAndFunDraftSeed() {
   return {
     currentPick: DRAFT.currentPick,
     draftLog: DRAFT_PICKS,
-    myDraftPicks: [],
+    myDraftPicks: DRAFT_PICKS.filter(p => p.isMyPick).map(p => p.player),
     myRoster: MY_TEAM.roster,
     seedVersion: SPORTS_AND_FUN_SEED_VERSION,
   };

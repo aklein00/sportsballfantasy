@@ -8,7 +8,7 @@ export default function RookiePickComparison({ comparison }) {
     <div className="border-b border-[#BF00FF] bg-[#0A0A0A]">
       <div className="px-3 py-2 bg-[#111] border-b border-[#BF00FF]/40 flex items-center justify-between gap-2">
         <span className="text-[10px] text-[#DFFF00] font-mono tracking-widest">
-          1.05 — HIT COMMIT
+          {comparison.overallPick === 21 ? '2.05 — HIT COMMIT' : `${comparison.overallPick} — HIT COMMIT`}
         </span>
         {comparison.takenOrderUnconfirmed && (
           <span className="text-[8px] text-[#555] font-mono">TAKEN 1–4 ORDER UNCONFIRMED</span>
@@ -45,8 +45,8 @@ export default function RookiePickComparison({ comparison }) {
               style={{
                 color:
                   p.verdict === 'TAKE' ? '#39FF14'
-                    : p.verdict === 'CLOSE 2ND' ? '#FFE600'
-                      : p.verdict === 'NEXT PICK' || p.verdict === '2.06 BACKUP' ? '#FF006E'
+                    : p.verdict === 'CLOSE 2ND' || p.verdict === 'STEAL' ? '#FFE600'
+                      : p.verdict === 'NEXT PICK' || p.verdict === 'IF SINGLETON GONE' || p.verdict === '2.06 BACKUP' ? '#FF006E'
                         : p.verdict === 'PASS' || p.verdict === 'LATER' ? '#555'
                           : '#FF006E',
               }}

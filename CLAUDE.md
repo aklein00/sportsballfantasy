@@ -267,17 +267,17 @@ Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS
 
 ### Sports and Fun (CBS Sports)
 
-**My team:** the sports and fun team · Draft slot #5
+**My team:** Scribbles · Draft slot #5
 
 | Setting | Value |
 |---------|-------|
 | Platform | CBS Sports |
 | Format | Dynasty |
-| Teams | 10 |
+| Teams | 16 |
 | Entry Fee | $100 |
 | Scoring | Not confirmed |
 | Rookie Draft | In progress (Aug 2026) |
-| Format | Snake |
+| Format | Linear (same slot every round) |
 | Rounds | 22 |
 
 **Starter slots (from CBS Active Players screenshot):** QB, RB, RB, WR, WR, TE, RWT, K, DST
@@ -286,9 +286,9 @@ Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS
 
 **Rest of roster (screenshots 2–3):** Geno Smith · Jerome Ford, Najee Harris, Rhamondre Stevenson · Garrett Wilson, Jayden Reed, Cedric Tillman, Tre Tucker, Christian Kirk, Joshua Palmer, KaVontae Turpin · Dalton Kincaid, Dawson Knox
 
-**2026 rookie draft (on the clock at 1.05):** Taken (slot order unconfirmed) — Jeremiyah Love, Jadarian Price, Carnell Tate, Mike Washington Jr.
+**2026 rookie draft (16-team linear, slot #5):** 1.05 Makai Lemon (WR, PHI). On deck at 2.05 (#21).
 
-**1.05 lean (no scoring assumed):** Jordyn Tyson now, Jonah Coleman at 2.06 (#16). RB youth behind Hall is a real hole (Etienne/Najee/Stevenson/Ford), but Love/Price/Washington are gone — Coleman is ~12th overall, not 5th. Lemon if Tyson is gone. Pass Sadiq (Kincaid + Juwan). Pass Mendoza (Stroud + Geno).
+**2.05 lean:** Nicholas Singleton (RB, TEN). You already took WR; Coleman/Allen/Black/Randall are gone. If Singleton goes at #20, Emmett Johnson (RB, KC). Omar Cooper Jr. (WR, NYJ) is the best remaining prospect — only if you will not force the RB.
 
 Roster seeded from `src/data/sportsAndFun.js`.
 
