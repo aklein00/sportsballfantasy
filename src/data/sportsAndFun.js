@@ -180,6 +180,34 @@ export const PICK_COMPARISON = {
   candidates: REMAINING_BOARD.filter(p =>
     ['Nicholas Singleton', 'Omar Cooper Jr.', 'Emmett Johnson', 'Eli Stowers'].includes(p.name)
   ),
+  followUp: {
+    overallPick: 25,
+    label: '2.09 AFTER THE STEVENSON TRADE',
+    recommendation: {
+      name: 'The other RB',
+      positions: ['RB'],
+      team: '—',
+      line: 'Singleton at 2.05 → Johnson at 2.09. Johnson at 2.05 → Singleton at 2.09. If both are gone: Omar Cooper, then Antonio Williams. Not Stowers. Not a kicker.',
+    },
+    candidates: [
+      player('saf-emmett-johnson-25', 'Emmett Johnson', 'RB', 'KC', {
+        verdict: 'TAKE IF SINGLETON AT 2.05',
+        why: 'Replaces Stevenson with a second young RB. Chiefs RB2 behind Walker.',
+      }),
+      player('saf-nicholas-singleton-25', 'Nicholas Singleton', 'RB', 'TEN', {
+        verdict: 'TAKE IF JOHNSON AT 2.05',
+        why: 'Same idea in reverse. Best remaining Titan back.',
+      }),
+      player('saf-omar-cooper-25', 'Omar Cooper Jr.', 'WR', 'NYJ', {
+        verdict: 'IF BOTH RBs GONE',
+        why: 'Best player left. Only if Singleton and Johnson are both off the board.',
+      }),
+      player('saf-antonio-williams-25', 'Antonio Williams', 'WR', 'WAS', {
+        verdict: 'NEXT WR',
+        why: 'If Cooper is gone too. Then Chris Bell / Germie Bernard. Skip Stowers — you have Kincaid.',
+      }),
+    ],
+  },
 };
 
 export const SPORTS_AND_FUN_SEED_VERSION = 4;

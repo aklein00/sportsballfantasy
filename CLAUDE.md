@@ -288,7 +288,7 @@ Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS
 
 **2026 rookie draft (16-team linear, slot #5):** 1.05 Makai Lemon (WR, PHI). On deck at 2.05 (#21).
 
-**2.05 lean:** Nicholas Singleton (RB, TEN). You already took WR; Coleman/Allen/Black/Randall are gone. If Singleton goes at #20, Emmett Johnson (RB, KC). Omar Cooper Jr. (WR, NYJ) is the best remaining prospect — only if you will not force the RB.
+**2.09 after Stevenson trade:** The other of Singleton/Johnson. If both gone: Omar Cooper Jr., then Antonio Williams. Not Stowers (Kincaid). Not a kicker.
 
 Roster seeded from `src/data/sportsAndFun.js`.
 

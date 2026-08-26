@@ -59,6 +59,41 @@ export default function RookiePickComparison({ comparison }) {
           )}
         </div>
       ))}
+
+      {comparison.followUp && (
+        <>
+          <div className="px-3 py-2 bg-[#111] border-b border-[#BF00FF]/40 border-t border-[#BF00FF]/40">
+            <span className="text-[10px] text-[#DFFF00] font-mono tracking-widest">
+              {comparison.followUp.label || 'NEXT PICK'}
+            </span>
+          </div>
+          {comparison.followUp.recommendation && (
+            <div className="px-3 py-3 border-b border-[#1a1a1a]">
+              <div className="text-[8px] text-[#39FF14] font-mono tracking-widest mb-1">THEN TAKE</div>
+              <p className="text-[11px] text-[#F0EDE0] font-mono leading-snug">
+                {comparison.followUp.recommendation.line}
+              </p>
+            </div>
+          )}
+          {(comparison.followUp.candidates || []).map((p) => (
+            <div key={p.id || p.name} className="px-3 py-2 border-b border-[#1a1a1a]">
+              <div className="flex items-baseline gap-2">
+                <span className="text-[9px] font-bold font-mono text-[#DFFF00] w-8 shrink-0">
+                  {p.positions?.[0]}
+                </span>
+                <span className="text-xs text-white font-mono flex-1 truncate">{p.name}</span>
+                <span className="text-[9px] text-[#555] font-mono">{p.team}</span>
+                <span className="text-[8px] font-bold font-mono shrink-0 text-[#FF006E]">
+                  {p.verdict}
+                </span>
+              </div>
+              {p.why && (
+                <p className="text-[10px] text-[#888] font-mono mt-1 leading-snug pl-8">{p.why}</p>
+              )}
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 }
