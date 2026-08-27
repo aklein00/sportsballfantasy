@@ -242,8 +242,8 @@ export const sportsAndFun = {
     order: 'Linear',
     mySlot: 5,
     status: 'in_progress',
-    currentPick: 20,
-    myNextPick: 21,
+    currentPick: 26,
+    myNextPick: 37,
   },
   schedule: {
     seasonStart: '2026-09-10',
@@ -259,8 +259,8 @@ export const sportsAndFun = {
     },
     {
       name: 'Rookie Draft',
-      summary: '16-team linear. Scribbles hold slot #5 — on deck at 2.05 (#21).',
-      detail: '1.05 Makai Lemon. Lean at 2.05: Nicholas Singleton (RB behind Hall). Omar Cooper Jr. is the leftover first-round WR if you will not force RB. Coleman already gone at 2.01.',
+      summary: '16-team linear. Scribbles hold slot #5 — next pick 3.05 (#37).',
+      detail: '1.05 Makai Lemon. 2.09 Omar Cooper Jr. (Stevenson traded for 2.09 + 2027 2nd). 2.05 selection not logged.',
     },
   ],
 };

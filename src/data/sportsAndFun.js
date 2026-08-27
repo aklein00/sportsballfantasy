@@ -1,5 +1,5 @@
 // Sports and Fun — CBS Sports Dynasty
-// Roster = ONLY the players in the three CBS screenshots, plus 1.05 Makai Lemon.
+// Roster = three CBS screenshots, minus Stevenson (traded), plus 1.05 Lemon and 2.09 Cooper.
 // Draft board from CBS screenshots (picks 5–19). Picks 1–4 named by owner, order unconfirmed.
 // Evidence from the board: 16 teams, linear (1.05 then 2.05). Scoring not confirmed.
 
@@ -19,8 +19,8 @@ export const DRAFT = {
   rounds: 22,
   mySlot: 5,
   status: 'in_progress',
-  currentPick: 20,
-  myNextPick: 21,
+  currentPick: 26,
+  myNextPick: 37,
 };
 
 const TEAM_NAME = 'Scribbles';
@@ -88,9 +88,9 @@ const REST = [
   player('saf-dalton-kincaid', 'Dalton Kincaid', 'TE', 'BUF', { active: false, slot: 'TE', proj: 111.2 }),
   player('saf-dawson-knox', 'Dawson Knox', 'TE', 'BUF', { active: false, slot: 'TE', proj: 50.1 }),
   player('saf-joshua-palmer', 'Joshua Palmer', 'WR', 'BUF', { active: false, slot: 'RWT', proj: 51.1 }),
-  player('saf-rhamondre-stevenson', 'Rhamondre Stevenson', 'RB', 'NE', { active: false, slot: 'RWT', proj: 133.1 }),
   player('saf-garrett-wilson', 'Garrett Wilson', 'WR', 'NYJ', { active: false, slot: 'RWT', proj: 139.3 }),
   player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', { active: false, slot: 'BN', rookie: true, draftPick: '1.05' }),
+  player('saf-omar-cooper', 'Omar Cooper Jr.', 'WR', 'NYJ', { active: false, slot: 'BN', rookie: true, draftPick: '2.09' }),
 ];
 
 export const MY_TEAM = {
@@ -122,95 +122,63 @@ export const DRAFT_PICKS = [
   pick(17, 'FREEBIRDS', player('saf-jonah-coleman', 'Jonah Coleman', 'RB', 'DEN')),
   pick(18, 'FREEBIRDS', player('saf-ty-simpson', 'Ty Simpson', 'QB', 'LAR')),
   pick(19, 'LLESSUR REMLAP', player('saf-d-stevens', 'D. Stevens', 'K', 'WAS')),
+  // 2.04–2.05 (#20–21) not logged — owner did not name the 2.05 selection
+  // 2.06–2.08 since 2.05, owner-listed order
+  pick(22, teamName(6), player('saf-chris-bell', 'Chris Bell', 'WR', 'MIA'), { orderUnconfirmed: true }),
+  pick(23, teamName(7), player('saf-ty-johnson', 'Ty Johnson', 'RB', 'BUF'), { orderUnconfirmed: true }),
+  pick(24, teamName(8), player('saf-tyler-bass', 'Tyler Bass', 'K', 'BUF'), { orderUnconfirmed: true }),
+  pick(25, 'Scribbles', player('saf-omar-cooper', 'Omar Cooper Jr.', 'WR', 'NYJ', { draftPick: '2.09' })),
 ];
 
-// Still on the board at 2.05 (pick 21). 2.04 (#20) has not been logged.
+// Still on the board after 2.09. Next Scribbles pick: 3.05 (#37).
 export const REMAINING_BOARD = [
-  player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', {
-    ecr: 15,
-    verdict: 'TAKE',
-    why: 'Best remaining RB. You took WR at 1.05. Hall needs a young partner; Coleman/Allen/Black/Randall are gone.',
+  player('saf-antonio-williams', 'Antonio Williams', 'WR', 'WAS', {
+    ecr: 13,
+    verdict: '3.05 LEAN',
+    why: 'Best remaining WR. You already have Chase, G. Wilson, Lemon, and Cooper.',
   }),
-  player('saf-omar-cooper', 'Omar Cooper Jr.', 'WR', 'NYJ', {
-    ecr: 8,
-    verdict: 'STEAL',
-    why: 'Best player left (consensus ~8). Only take him if you refuse to force the RB. You already have Chase, G. Wilson, Lemon.',
-  }),
-  player('saf-emmett-johnson', 'Emmett Johnson', 'RB', 'KC', {
-    ecr: 17,
-    verdict: 'IF SINGLETON GONE',
-    why: 'Next RB. Chiefs RB2 behind Walker. Take him if #20 grabs Singleton.',
+  player('saf-germie-bernard', 'Germie Bernard', 'WR', 'PIT', {
+    ecr: 16,
+    verdict: '3.05 ALT',
+    why: 'Next WR if Williams is gone.',
   }),
   player('saf-eli-stowers', 'Eli Stowers', 'TE', 'PHI', {
     ecr: 11,
     verdict: 'PASS',
-    why: 'Value TE, but you already have Kincaid and Juwan Johnson.',
+    why: 'You already have Kincaid and Juwan Johnson.',
   }),
-  player('saf-antonio-williams', 'Antonio Williams', 'WR', 'WAS', {
-    ecr: 13,
-    verdict: 'PASS',
-    why: 'More WR. You just took Lemon.',
+  player('saf-mike-washington-jr', 'Mike Washington Jr.', 'RB', 'LV', {
+    ecr: 26,
+    verdict: 'RB DART',
+    why: 'Jeanty handcuff. Only if 2.05 was not a young RB and you still want one.',
   }),
-  player('saf-chris-bell', 'Chris Bell', 'WR', 'MIA', {
-    ecr: 14,
-    verdict: 'LATER',
-    why: 'Fine in round 3. Not 2.05.',
-  }),
-  player('saf-germie-bernard', 'Germie Bernard', 'WR', 'PIT', {
-    ecr: 16,
-    verdict: 'LATER',
-    why: 'Round-3 WR. Pass at 2.05.',
+  player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', {
+    ecr: 15,
+    verdict: 'IF STILL THERE',
+    why: 'Take him at 3.05 if he lasted. That was the 2.05 target.',
   }),
   player('saf-demond-claiborne', 'Demond Claiborne', 'RB', 'MIN', {
     ecr: 28,
     verdict: 'LATER',
-    why: 'Depth RB. Only if Singleton and Johnson are both gone.',
+    why: 'Depth RB. Round 3/4.',
   }),
 ];
 
 export const PICK_COMPARISON = {
-  overallPick: 21,
+  overallPick: 37,
   takenOrderUnconfirmed: true,
   recommendation: {
-    name: 'Nicholas Singleton',
-    positions: ['RB'],
-    team: 'TEN',
-    line: 'Take Singleton. You already got Lemon. Coleman is gone — this is the RB. Cooper is the leftover first-round WR if you will not force it.',
+    name: 'Antonio Williams',
+    positions: ['WR'],
+    team: 'WAS',
+    line: 'Cooper is in. Next is 3.05. Williams if BPA. If 2.05 was not Singleton, take a young RB instead.',
   },
   candidates: REMAINING_BOARD.filter(p =>
-    ['Nicholas Singleton', 'Omar Cooper Jr.', 'Emmett Johnson', 'Eli Stowers'].includes(p.name)
+    ['Antonio Williams', 'Germie Bernard', 'Mike Washington Jr.', 'Eli Stowers'].includes(p.name)
   ),
-  followUp: {
-    overallPick: 25,
-    label: '2.09 AFTER THE STEVENSON TRADE',
-    recommendation: {
-      name: 'The other RB',
-      positions: ['RB'],
-      team: '—',
-      line: 'Singleton at 2.05 → Johnson at 2.09. Johnson at 2.05 → Singleton at 2.09. If both are gone: Omar Cooper, then Antonio Williams. Not Stowers. Not a kicker.',
-    },
-    candidates: [
-      player('saf-emmett-johnson-25', 'Emmett Johnson', 'RB', 'KC', {
-        verdict: 'TAKE IF SINGLETON AT 2.05',
-        why: 'Replaces Stevenson with a second young RB. Chiefs RB2 behind Walker.',
-      }),
-      player('saf-nicholas-singleton-25', 'Nicholas Singleton', 'RB', 'TEN', {
-        verdict: 'TAKE IF JOHNSON AT 2.05',
-        why: 'Same idea in reverse. Best remaining Titan back.',
-      }),
-      player('saf-omar-cooper-25', 'Omar Cooper Jr.', 'WR', 'NYJ', {
-        verdict: 'IF BOTH RBs GONE',
-        why: 'Best player left. Only if Singleton and Johnson are both off the board.',
-      }),
-      player('saf-antonio-williams-25', 'Antonio Williams', 'WR', 'WAS', {
-        verdict: 'NEXT WR',
-        why: 'If Cooper is gone too. Then Chris Bell / Germie Bernard. Skip Stowers — you have Kincaid.',
-      }),
-    ],
-  },
 };
 
-export const SPORTS_AND_FUN_SEED_VERSION = 4;
+export const SPORTS_AND_FUN_SEED_VERSION = 5;
 
 export function sportsAndFunDraftSeed() {
   return {
