@@ -267,17 +267,30 @@ Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS
 
 ### Sports and Fun (CBS Sports)
 
+**My team:** Scribbles · Draft slot #5
+
 | Setting | Value |
 |---------|-------|
 | Platform | CBS Sports |
-| Format | Dynasty Superflex |
-| Teams | 10 |
+| Format | Dynasty |
+| Teams | 16 |
 | Entry Fee | $100 |
-| Scoring | Half-PPR |
-| Startup Draft | Aug 1, 2026 |
+| Scoring | Not confirmed |
+| Rookie Draft | In progress (Aug 2026) |
+| Format | Linear (same slot every round) |
 | Rounds | 22 |
 
-**Roster:** QB×1, RB×2, WR×3, TE×1, FLEX×1, SUPERFLEX×1 · Bench 10 · IR 3
+**Starter slots (from CBS Active Players screenshot):** QB, RB, RB, WR, WR, TE, RWT, K, DST
+
+**Active (screenshot 1):** C.J. Stroud · Travis Etienne, Breece Hall · Ja'Marr Chase, Michael Wilson · Juwan Johnson · Michael Pittman Jr. (RWT) · Cam Little · Commanders
+
+**Rest of roster (screenshots 2–3, Stevenson traded, plus rookies):** Geno Smith · Jerome Ford, Najee Harris, Nicholas Singleton · Garrett Wilson, Jayden Reed, Cedric Tillman, Tre Tucker, Christian Kirk, Joshua Palmer, KaVontae Turpin, Makai Lemon, Omar Cooper Jr. · Dalton Kincaid, Dawson Knox, Eli Stowers
+
+**2026 rookie draft (16-team linear, slot #5):** 1.05 Makai Lemon (WR, PHI). 2.05 Nicholas Singleton (RB, TEN). 2.09 Omar Cooper Jr. (WR, NYJ). 3.05 Eli Stowers (TE, PHI). Next: 4.05 (#53). Hunt a veteran RB who can play 2026.
+
+**Trade:** Rhamondre Stevenson for 2026 2.09 + a 2027 2nd.
+
+Roster seeded from `src/data/sportsAndFun.js`.
 
 ---
 

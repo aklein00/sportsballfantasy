@@ -5,7 +5,7 @@ import { useNflPlayerData } from '../hooks/useNflPlayerData.js';
 function PlayerRow({ player, nflData }) {
   const { getInjury } = nflData || {};
   const injury = getInjury?.(player.name);
-  const pos = player.positions?.[0] || player.position || '—';
+  const pos = player.slot || player.positions?.[0] || player.position || '—';
 
   return (
     <div className="flex items-center gap-2 px-3 py-1.5 border-b border-[#1a1a1a] stat-row">
@@ -25,10 +25,13 @@ function PlayerRow({ player, nflData }) {
       )}
       {player.status && (
         <span className="text-[8px] font-bold font-mono shrink-0" style={{
-          color: player.status === 'IR' ? '#FF006E' : player.status === 'PUP' ? '#DFFF00' : '#888',
+          color: player.status === 'IR' ? '#FF006E' : player.status === 'PUP' ? '#DFFF00' : player.status === 'Q' ? '#FF2200' : '#888',
         }}>
           {player.status}
         </span>
+      )}
+      {player.active === false && (
+        <span className="text-[8px] text-[#444] font-mono shrink-0">BN</span>
       )}
       {player.note && (
         <span className="text-[8px] text-[#555] font-mono shrink-0 truncate max-w-16" title={player.note}>{player.note}</span>
@@ -63,9 +66,10 @@ export default function FootballTeamView({ leagueId, myRoster = [], sleeperRoste
     ? sleeperRoster.players
     : (league.myTeam?.roster?.length ? league.myTeam.roster : myRoster);
 
+  const screenshotStarters = roster.filter(p => p.active);
   const starters = sleeperRoster?.starters?.length
     ? sleeperRoster.starters
-    : [];
+    : screenshotStarters;
 
   const slots = league.starterSlots || [];
   const flatSlots = slots.flatMap(s => Array(s.count).fill(s.slot));
@@ -81,8 +85,10 @@ export default function FootballTeamView({ leagueId, myRoster = [], sleeperRoste
           {league.myTeam?.name || league.name}
         </h2>
         <div className="text-xs text-[#555] font-mono mt-1">
-          {league.myTeam?.owner && <span>{league.myTeam.owner} · </span>}
-          {league.teamCount} Teams · {league.scoring?.format} · Season {league.season}
+          {league.myTeam?.owner ? <span>{league.myTeam.owner} · </span> : null}
+          {league.teamCount} Teams
+          {league.scoring?.format ? ` · ${league.scoring.format}` : ''}
+          {' · '}Season {league.season}
           {league.myTeam?.draftSlot && (
             <span> · Draft slot #{league.myTeam.draftSlot}</span>
           )}

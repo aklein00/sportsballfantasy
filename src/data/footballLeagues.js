@@ -6,6 +6,17 @@ import {
   industryFootballDraftSeed,
   getIndustryTeamName,
 } from './industryFootball.js';
+import {
+  MY_TEAM as SAF_MY_TEAM,
+  sportsAndFunDraftSeed,
+  getSportsAndFunTeamName,
+  getSportsAndFunRookiePool,
+  PICK_COMPARISON as SAF_PICK_COMPARISON,
+  SPORTS_AND_FUN_SEED_VERSION,
+} from './sportsAndFun.js';
+
+export { SPORTS_AND_FUN_SEED_VERSION };
+
 export const californianDynasty = {
   id: 'californian-dynasty',
   name: 'Californian Dynasty',
@@ -194,58 +205,45 @@ export const sportsAndFun = {
   platform: 'CBS Sports',
   format: 'Dynasty',
   season: 2026,
-  status: 'startup',
+  status: 'in_progress',
   active: true,
   url: null,
   myTeam: {
-    name: 'TBD',
-    owner: 'Scribbles',
+    name: SAF_MY_TEAM.name,
+    owner: SAF_MY_TEAM.owner,
+    draftSlot: SAF_MY_TEAM.draftSlot,
+    roster: SAF_MY_TEAM.roster,
   },
-  teamCount: 10,
+  teamCount: 16,
   entryFee: 100,
+  getTeamName: getSportsAndFunTeamName,
+  getDraftSeed: sportsAndFunDraftSeed,
+  getAvailablePool: getSportsAndFunRookiePool,
+  pickComparison: SAF_PICK_COMPARISON,
   rosterLimits: {
     starters: { min: 9, max: 9 },
-    bench: { min: 0, max: 10 },
-    ir: { min: 0, max: 3 },
-    total: { min: 9, max: 22 },
   },
   starterSlots: [
     { slot: 'QB', count: 1, label: 'Quarterback' },
     { slot: 'RB', count: 2, label: 'Running Back' },
-    { slot: 'WR', count: 3, label: 'Wide Receiver' },
+    { slot: 'WR', count: 2, label: 'Wide Receiver' },
     { slot: 'TE', count: 1, label: 'Tight End' },
-    { slot: 'FLEX', count: 1, label: 'RB/WR/TE Flex' },
-    { slot: 'SUPERFLEX', count: 1, label: 'Superflex (QB eligible)' },
+    { slot: 'RWT', count: 1, label: 'RB/WR/TE Flex' },
+    { slot: 'K', count: 1, label: 'Kicker' },
+    { slot: 'DST', count: 1, label: 'Defense / ST' },
   ],
-  scoring: {
-    format: 'Half-PPR Dynasty',
-    passing: [
-      { stat: 'PASS_YDS', label: 'Passing Yards', ptsPer: 0.04 },
-      { stat: 'PASS_TD', label: 'Passing TD', ptsPer: 4 },
-      { stat: 'INT', label: 'Interception', ptsPer: -2 },
-    ],
-    rushing: [
-      { stat: 'RUSH_YDS', label: 'Rushing Yards', ptsPer: 0.1 },
-      { stat: 'RUSH_TD', label: 'Rushing TD', ptsPer: 6 },
-    ],
-    receiving: [
-      { stat: 'REC', label: 'Reception (Half-PPR)', ptsPer: 0.5 },
-      { stat: 'REC_YDS', label: 'Receiving Yards', ptsPer: 0.1 },
-      { stat: 'REC_TD', label: 'Receiving TD', ptsPer: 6 },
-    ],
-    misc: [
-      { stat: 'FUM_LOST', label: 'Fumble Lost', ptsPer: -2 },
-      { stat: '2PT', label: '2-Point Conversion', ptsPer: 2 },
-    ],
-  },
+  scoring: null,
   draft: {
-    format: 'Startup Snake',
-    type: 'startup',
+    format: 'linear',
+    type: 'rookie',
     date: '2026-08-01T14:00:00-04:00',
+    teamCount: 16,
     rounds: 22,
-    order: 'Snake',
-    myPick: null,
-    status: 'pre-draft',
+    order: 'Linear',
+    mySlot: 5,
+    status: 'in_progress',
+    currentPick: 38,
+    myNextPick: 53,
   },
   schedule: {
     seasonStart: '2026-09-10',
@@ -260,14 +258,9 @@ export const sportsAndFun = {
       detail: 'Startup draft establishes initial rosters. Commissioner sets constitution on CBS.',
     },
     {
-      name: 'WR Premium',
-      summary: 'Three starting WR slots — depth matters.',
-      detail: 'Build WR corps early in startup. Superflex adds QB scarcity premium.',
-    },
-    {
-      name: 'Entry Fee',
-      summary: '$100 buy-in. Payout structure TBD by league vote.',
-      detail: '10-team league. Payouts set at draft or season start.',
+      name: 'Rookie Draft',
+      summary: '16-team linear. Scribbles hold slot #5 — next pick 4.05 (#53).',
+      detail: '1.05 Makai Lemon. 2.05 Nicholas Singleton. 2.09 Omar Cooper Jr. 3.05 Eli Stowers. 4.05 hunt a 2026 veteran RB.',
     },
   ],
 };

@@ -2,8 +2,14 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { ALL_STARTUP_TARGETS, getFootballLeague } from '../data/footballLeagues.js';
 import { INDUSTRY_SEED_VERSION } from '../data/industryFootball.js';
+import { SPORTS_AND_FUN_SEED_VERSION } from '../data/sportsAndFun.js';
 
 const STORAGE_PREFIX = 'sbf_football_draft_';
+
+const SEED_VERSIONS = {
+  'industry-football': INDUSTRY_SEED_VERSION,
+  'sports-and-fun': SPORTS_AND_FUN_SEED_VERSION,
+};
 
 function storageKey(leagueId) {
   return `${STORAGE_PREFIX}${leagueId}`;
@@ -72,8 +78,8 @@ export function useFootballDraft(leagueId) {
     if (!leagueId || !league) return;
 
     const saved = loadState(leagueId);
-    const seedVersion = league.getDraftSeed ? INDUSTRY_SEED_VERSION : null;
-    const savedStale = saved && seedVersion && saved.seedVersion !== seedVersion;
+    const seedVersion = league.getDraftSeed ? (SEED_VERSIONS[leagueId] ?? null) : null;
+    const savedStale = saved && seedVersion != null && saved.seedVersion !== seedVersion;
 
     if (saved && !savedStale) {
       setCurrentPick(saved.currentPick ?? 1);
@@ -98,18 +104,26 @@ export function useFootballDraft(leagueId) {
   // Persist on change
   useEffect(() => {
     if (!leagueId || !initialized) return;
-    saveState(leagueId, { currentPick, draftLog, myRoster, queuedIds });
+    const seedVersion = SEED_VERSIONS[leagueId];
+    saveState(leagueId, {
+      currentPick,
+      draftLog,
+      myRoster,
+      queuedIds,
+      ...(seedVersion != null ? { seedVersion } : {}),
+    });
   }, [leagueId, currentPick, draftLog, myRoster, queuedIds, initialized]);
 
   const takenIds = useMemo(() => new Set(draftLog.map(d => d.player?.id)), [draftLog]);
   const takenNames = useMemo(() => new Set(draftLog.map(d => d.player?.name?.toLowerCase())), [draftLog]);
 
   const available = useMemo(() => {
-    const pool = league?.draft?.status === 'in_progress'
-      ? ALL_STARTUP_TARGETS.filter(p => !takenNames.has(p.name.toLowerCase()))
-      : ALL_STARTUP_TARGETS.filter(p => !takenIds.has(p.id));
-    return pool;
-  }, [takenIds, takenNames, league?.draft?.status]);
+    const source = league?.getAvailablePool?.() || ALL_STARTUP_TARGETS;
+    if (league?.draft?.status === 'in_progress') {
+      return source.filter(p => !takenNames.has(p.name.toLowerCase()));
+    }
+    return source.filter(p => !takenIds.has(p.id));
+  }, [takenIds, takenNames, league]);
 
   const isMyTurn = pickSlot(currentPick, totalTeams, order) === myPick;
 
