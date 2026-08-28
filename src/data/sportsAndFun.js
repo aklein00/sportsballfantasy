@@ -19,7 +19,7 @@ export const DRAFT = {
   rounds: 22,
   mySlot: 5,
   status: 'in_progress',
-  currentPick: 26,
+  currentPick: 36,
   myNextPick: 37,
 };
 
@@ -105,6 +105,8 @@ export const DRAFT_PICKS = [
   pick(1, teamName(1), player('saf-jeremiyah-love', 'Jeremiyah Love', 'RB', 'ARI'), { orderUnconfirmed: true }),
   pick(2, teamName(2), player('saf-jadarian-price', 'Jadarian Price', 'RB', 'SEA'), { orderUnconfirmed: true }),
   pick(3, teamName(3), player('saf-carnell-tate', 'Carnell Tate', 'WR', 'TEN'), { orderUnconfirmed: true }),
+  // Owner named "M. Washington" among the four gone before 1.05. Later asked about him at 2.05,
+  // so this 1.04 mapping is likely wrong. He remains on the 3.05 remaining board.
   pick(4, teamName(4), player('saf-mike-washington', 'Mike Washington Jr.', 'RB', 'LV'), { orderUnconfirmed: true }),
   // 1.05–1.16 and 2.01–2.03 from CBS draft-board screenshots
   pick(5, 'Scribbles', player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', { draftPick: '1.05' })),
@@ -128,39 +130,36 @@ export const DRAFT_PICKS = [
   pick(23, teamName(7), player('saf-ty-johnson', 'Ty Johnson', 'RB', 'BUF'), { orderUnconfirmed: true }),
   pick(24, teamName(8), player('saf-tyler-bass', 'Tyler Bass', 'K', 'BUF'), { orderUnconfirmed: true }),
   pick(25, 'Scribbles', player('saf-omar-cooper', 'Omar Cooper Jr.', 'WR', 'NYJ', { draftPick: '2.09' })),
+  // 26–35 from CBS screenshot. Team names as shown on the board (trades mean slot ≠ original owner).
+  pick(26, 'Todd Hartwig', player('saf-caleb-douglas', 'Caleb Douglas', 'WR', 'MIA')),
+  pick(27, 'Goodfellas', player('saf-ted-hurst', 'Ted Hurst III', 'WR', 'TB')),
+  pick(28, 'Team Topher', player('saf-antonio-williams', 'Antonio Williams', 'WR', 'WAS')),
+  pick(29, 'La Porta Potty', player('saf-seth-mcgowan', 'Seth McGowan', 'RB', 'IND')),
+  pick(30, 'TeSlaa On Fire', player('saf-demond-claiborne', 'Demond Claiborne', 'RB', 'MIN')),
+  pick(31, 'Under Construction', player('saf-zachariah-branch', 'Zachariah Branch', 'WR', 'ATL')),
+  pick(32, 'BB and the Starfish', player('saf-germie-bernard', 'Germie Bernard', 'WR', 'PIT')),
+  pick(33, 'FREEBIRDS', player('saf-elijah-sarratt', 'Elijah Sarratt', 'WR', 'BAL')),
+  pick(34, "Soup's Kitchen", player('saf-adonai-mitchell', 'Adonai Mitchell', 'WR', 'NYJ'), { veteranLikely: true }),
+  pick(35, 'LLESSUR REMLAP', player('saf-jam-miller', 'Jam Miller', 'RB', 'NE')),
 ];
 
-// Still on the board after 2.09. Next Scribbles pick: 3.05 (#37).
+// Pick 36 is on the board. Scribbles are next at 3.05 (#37).
+// Williams / Bernard / Claiborne went 28 / 32 / 30. Do not take another WR.
 export const REMAINING_BOARD = [
-  player('saf-antonio-williams', 'Antonio Williams', 'WR', 'WAS', {
-    ecr: 13,
-    verdict: '3.05 LEAN',
-    why: 'Best remaining WR. You already have Chase, G. Wilson, Lemon, and Cooper.',
+  player('saf-mike-washington-jr', 'Mike Washington Jr.', 'RB', 'LV', {
+    ecr: 25,
+    verdict: 'TAKE',
+    why: 'Jeanty ankle — could miss Week 1 / a few weeks. Washington 8-49 last night, 168 preseason yards at 7.3 YPC. Your RB room needs 2026 snaps.',
   }),
-  player('saf-germie-bernard', 'Germie Bernard', 'WR', 'PIT', {
-    ecr: 16,
-    verdict: '3.05 ALT',
-    why: 'Next WR if Williams is gone.',
+  player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', {
+    ecr: 15,
+    verdict: 'IF WASHINGTON GONE',
+    why: 'RB4/5 of the class. Take him if Washington goes at 36, or if you somehow already have Washington. Skip if 2.05 was already Singleton.',
   }),
   player('saf-eli-stowers', 'Eli Stowers', 'TE', 'PHI', {
     ecr: 11,
     verdict: 'PASS',
-    why: 'You already have Kincaid and Juwan Johnson.',
-  }),
-  player('saf-mike-washington-jr', 'Mike Washington Jr.', 'RB', 'LV', {
-    ecr: 26,
-    verdict: 'RB DART',
-    why: 'Jeanty handcuff. Only if 2.05 was not a young RB and you still want one.',
-  }),
-  player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', {
-    ecr: 15,
-    verdict: 'IF STILL THERE',
-    why: 'Take him at 3.05 if he lasted. That was the 2.05 target.',
-  }),
-  player('saf-demond-claiborne', 'Demond Claiborne', 'RB', 'MIN', {
-    ecr: 28,
-    verdict: 'LATER',
-    why: 'Depth RB. Round 3/4.',
+    why: 'Hamstring, camp struggles, TE3 behind Goedert/Mundt. You already have Kincaid.',
   }),
 ];
 
@@ -168,17 +167,17 @@ export const PICK_COMPARISON = {
   overallPick: 37,
   takenOrderUnconfirmed: true,
   recommendation: {
-    name: 'Antonio Williams',
-    positions: ['WR'],
-    team: 'WAS',
-    line: 'Cooper is in. Next is 3.05. Williams if BPA. If 2.05 was not Singleton, take a young RB instead.',
+    name: 'Mike Washington Jr.',
+    positions: ['RB'],
+    team: 'LV',
+    line: 'Take Washington. If 36 takes him, take Singleton unless 2.05 was already Singleton. Do not take a WR or a kicker.',
   },
   candidates: REMAINING_BOARD.filter(p =>
-    ['Antonio Williams', 'Germie Bernard', 'Mike Washington Jr.', 'Eli Stowers'].includes(p.name)
+    ['Mike Washington Jr.', 'Nicholas Singleton', 'Eli Stowers'].includes(p.name)
   ),
 };
 
-export const SPORTS_AND_FUN_SEED_VERSION = 5;
+export const SPORTS_AND_FUN_SEED_VERSION = 6;
 
 export function sportsAndFunDraftSeed() {
   return {
