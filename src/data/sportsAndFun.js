@@ -1,5 +1,5 @@
 // Sports and Fun — CBS Sports Dynasty
-// Roster = three CBS screenshots, minus Stevenson (traded), plus 1.05 Lemon and 2.09 Cooper.
+// Roster = three CBS screenshots, minus Stevenson (traded), plus 1.05 Lemon, 2.05 Singleton, 2.09 Cooper.
 // Draft board from CBS screenshots (picks 5–19). Picks 1–4 named by owner, order unconfirmed.
 // Evidence from the board: 16 teams, linear (1.05 then 2.05). Scoring not confirmed.
 
@@ -91,6 +91,7 @@ const REST = [
   player('saf-garrett-wilson', 'Garrett Wilson', 'WR', 'NYJ', { active: false, slot: 'RWT', proj: 139.3 }),
   player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', { active: false, slot: 'BN', rookie: true, draftPick: '1.05' }),
   player('saf-omar-cooper', 'Omar Cooper Jr.', 'WR', 'NYJ', { active: false, slot: 'BN', rookie: true, draftPick: '2.09' }),
+  player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', { active: false, slot: 'BN', rookie: true, draftPick: '2.05' }),
 ];
 
 export const MY_TEAM = {
@@ -105,9 +106,8 @@ export const DRAFT_PICKS = [
   pick(1, teamName(1), player('saf-jeremiyah-love', 'Jeremiyah Love', 'RB', 'ARI'), { orderUnconfirmed: true }),
   pick(2, teamName(2), player('saf-jadarian-price', 'Jadarian Price', 'RB', 'SEA'), { orderUnconfirmed: true }),
   pick(3, teamName(3), player('saf-carnell-tate', 'Carnell Tate', 'WR', 'TEN'), { orderUnconfirmed: true }),
-  // Owner named "M. Washington" among the four gone before 1.05. Later asked about him at 2.05,
-  // so this 1.04 mapping is likely wrong. He remains on the 3.05 remaining board.
-  pick(4, teamName(4), player('saf-mike-washington', 'Mike Washington Jr.', 'RB', 'LV'), { orderUnconfirmed: true }),
+  // 1.04 not logged — "M. Washington" was named among the four gone before 1.05, but
+  // Washington is still on the board at 3.05, so that mapping was wrong.
   // 1.05–1.16 and 2.01–2.03 from CBS draft-board screenshots
   pick(5, 'Scribbles', player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', { draftPick: '1.05' })),
   pick(6, 'FREEBIRDS', player('saf-fernando-mendoza', 'Fernando Mendoza', 'QB', 'LV')),
@@ -124,7 +124,8 @@ export const DRAFT_PICKS = [
   pick(17, 'FREEBIRDS', player('saf-jonah-coleman', 'Jonah Coleman', 'RB', 'DEN')),
   pick(18, 'FREEBIRDS', player('saf-ty-simpson', 'Ty Simpson', 'QB', 'LAR')),
   pick(19, 'LLESSUR REMLAP', player('saf-d-stevens', 'D. Stevens', 'K', 'WAS')),
-  // 2.04–2.05 (#20–21) not logged — owner did not name the 2.05 selection
+  // 2.04 (#20) not logged
+  pick(21, 'Scribbles', player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', { draftPick: '2.05' })),
   // 2.06–2.08 since 2.05, owner-listed order
   pick(22, teamName(6), player('saf-chris-bell', 'Chris Bell', 'WR', 'MIA'), { orderUnconfirmed: true }),
   pick(23, teamName(7), player('saf-ty-johnson', 'Ty Johnson', 'RB', 'BUF'), { orderUnconfirmed: true }),
@@ -143,23 +144,22 @@ export const DRAFT_PICKS = [
   pick(35, 'LLESSUR REMLAP', player('saf-jam-miller', 'Jam Miller', 'RB', 'NE')),
 ];
 
-// Pick 36 is on the board. Scribbles are next at 3.05 (#37).
-// Williams / Bernard / Claiborne went 28 / 32 / 30. Do not take another WR.
+// Pick 36 is on the board. Scribbles are next at 3.05 (#37). Singleton is already on the roster.
 export const REMAINING_BOARD = [
   player('saf-mike-washington-jr', 'Mike Washington Jr.', 'RB', 'LV', {
-    ecr: 25,
+    ecr: 24,
     verdict: 'TAKE',
-    why: 'Jeanty ankle — could miss Week 1 / a few weeks. Washington 8-49 last night, 168 preseason yards at 7.3 YPC. Your RB room needs 2026 snaps.',
-  }),
-  player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', {
-    ecr: 15,
-    verdict: 'IF WASHINGTON GONE',
-    why: 'RB4/5 of the class. Take him if Washington goes at 36, or if you somehow already have Washington. Skip if 2.05 was already Singleton.',
+    why: 'Jeanty ankle. 8-49 last night, 168 preseason yards at 7.3 YPC. You already have Singleton — this is the 2026 RB dart.',
   }),
   player('saf-eli-stowers', 'Eli Stowers', 'TE', 'PHI', {
-    ecr: 11,
-    verdict: 'PASS',
-    why: 'Hamstring, camp struggles, TE3 behind Goedert/Mundt. You already have Kincaid.',
+    ecr: 12,
+    verdict: 'IF WASHINGTON GONE',
+    why: 'Best remaining prospect (2nd-round TE2 of the class). 2026 is dead — hamstring, likely inactive. 2027 bet after Goedert.',
+  }),
+  player('saf-eli-raridon', 'Eli Raridon', 'TE', 'NE', {
+    ecr: 28,
+    verdict: 'IF STOWERS GONE TOO',
+    why: 'TE2 in New England after Julian Hill IR. Camp buzz. Take him only if Washington and Stowers are both gone.',
   }),
 ];
 
@@ -170,14 +170,12 @@ export const PICK_COMPARISON = {
     name: 'Mike Washington Jr.',
     positions: ['RB'],
     team: 'LV',
-    line: 'Take Washington. If 36 takes him, take Singleton unless 2.05 was already Singleton. Do not take a WR or a kicker.',
+    line: 'Take Washington. If 36 takes him, take Eli Stowers. If Stowers is gone too, take Eli Raridon. Do not take a WR, a kicker, or Heidenreich.',
   },
-  candidates: REMAINING_BOARD.filter(p =>
-    ['Mike Washington Jr.', 'Nicholas Singleton', 'Eli Stowers'].includes(p.name)
-  ),
+  candidates: REMAINING_BOARD,
 };
 
-export const SPORTS_AND_FUN_SEED_VERSION = 6;
+export const SPORTS_AND_FUN_SEED_VERSION = 7;
 
 export function sportsAndFunDraftSeed() {
   return {

@@ -48,7 +48,7 @@ export default function RookiePickComparison({ comparison }) {
               style={{
                 color:
                   p.verdict === 'TAKE' ? '#39FF14'
-                    : p.verdict === 'CLOSE 2ND' || p.verdict === 'STEAL' ? '#FFE600'
+                    : p.verdict === 'CLOSE 2ND' || p.verdict === 'STEAL' || p.verdict === 'IF WASHINGTON GONE' ? '#FFE600'
                       : p.verdict === 'NEXT PICK' || p.verdict === 'IF SINGLETON GONE' || p.verdict === '2.06 BACKUP' ? '#FF006E'
                         : p.verdict === 'PASS' || p.verdict === 'LATER' ? '#555'
                           : '#FF006E',

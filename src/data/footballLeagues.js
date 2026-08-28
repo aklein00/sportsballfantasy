@@ -260,7 +260,7 @@ export const sportsAndFun = {
     {
       name: 'Rookie Draft',
       summary: '16-team linear. Scribbles hold slot #5 — next pick 3.05 (#37). Pick 36 is on the clock.',
-      detail: '1.05 Makai Lemon. 2.09 Omar Cooper Jr. (Stevenson traded for 2.09 + 2027 2nd). 2.05 selection not logged. 3.05 lean: Mike Washington Jr.',
+      detail: '1.05 Makai Lemon. 2.05 Nicholas Singleton. 2.09 Omar Cooper Jr. (Stevenson traded for 2.09 + 2027 2nd). 3.05 take Washington; fallback Stowers then Raridon.',
     },
   ],
 };
