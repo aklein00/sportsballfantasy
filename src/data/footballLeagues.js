@@ -242,8 +242,8 @@ export const sportsAndFun = {
     order: 'Linear',
     mySlot: 5,
     status: 'in_progress',
-    currentPick: 36,
-    myNextPick: 37,
+    currentPick: 38,
+    myNextPick: 53,
   },
   schedule: {
     seasonStart: '2026-09-10',
@@ -259,8 +259,8 @@ export const sportsAndFun = {
     },
     {
       name: 'Rookie Draft',
-      summary: '16-team linear. Scribbles hold slot #5 — next pick 3.05 (#37). Pick 36 is on the clock.',
-      detail: '1.03 Mike Washington Jr. 1.05 Makai Lemon. 2.05 Nicholas Singleton. 2.09 Omar Cooper Jr. 3.05 take Eli Stowers; fallback Eli Raridon.',
+      summary: '16-team linear. Scribbles hold slot #5 — next pick 4.05 (#53).',
+      detail: '1.05 Makai Lemon. 2.05 Nicholas Singleton. 2.09 Omar Cooper Jr. 3.05 Eli Stowers. 4.05 hunt a 2026 veteran RB.',
     },
   ],
 };

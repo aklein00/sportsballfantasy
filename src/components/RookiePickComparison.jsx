@@ -10,8 +10,9 @@ export default function RookiePickComparison({ comparison }) {
         <span className="text-[10px] text-[#DFFF00] font-mono tracking-widest">
           {comparison.overallPick === 21 ? '2.05 — HIT COMMIT'
             : comparison.overallPick === 25 ? '2.09 — HIT COMMIT'
-              : comparison.overallPick === 37 ? '3.05 — NEXT'
-                : `${comparison.overallPick} — HIT COMMIT`}
+              : comparison.overallPick === 37 ? '3.05 — HIT COMMIT'
+                : comparison.overallPick === 53 ? '4.05 — NEXT'
+                  : `${comparison.overallPick} — HIT COMMIT`}
         </span>
         {comparison.takenOrderUnconfirmed && (
           <span className="text-[8px] text-[#555] font-mono">TAKEN 1–4 ORDER UNCONFIRMED</span>

@@ -1,5 +1,6 @@
 // Sports and Fun — CBS Sports Dynasty
-// Roster = three CBS screenshots, minus Stevenson (traded), plus 1.05 Lemon, 2.05 Singleton, 2.09 Cooper.
+// Roster = three CBS screenshots, minus Stevenson (traded),
+// plus 1.05 Lemon, 2.05 Singleton, 2.09 Cooper, 3.05 Stowers.
 // Draft board from CBS screenshots (picks 5–19). Picks 1–4 named by owner, order unconfirmed.
 // Evidence from the board: 16 teams, linear (1.05 then 2.05). Scoring not confirmed.
 
@@ -19,8 +20,8 @@ export const DRAFT = {
   rounds: 22,
   mySlot: 5,
   status: 'in_progress',
-  currentPick: 36,
-  myNextPick: 37,
+  currentPick: 38,
+  myNextPick: 53,
 };
 
 const TEAM_NAME = 'Scribbles';
@@ -92,6 +93,7 @@ const REST = [
   player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', { active: false, slot: 'BN', rookie: true, draftPick: '1.05' }),
   player('saf-omar-cooper', 'Omar Cooper Jr.', 'WR', 'NYJ', { active: false, slot: 'BN', rookie: true, draftPick: '2.09' }),
   player('saf-nicholas-singleton', 'Nicholas Singleton', 'RB', 'TEN', { active: false, slot: 'BN', rookie: true, draftPick: '2.05' }),
+  player('saf-eli-stowers', 'Eli Stowers', 'TE', 'PHI', { active: false, slot: 'BN', rookie: true, draftPick: '3.05' }),
 ];
 
 export const MY_TEAM = {
@@ -142,36 +144,38 @@ export const DRAFT_PICKS = [
   pick(33, 'FREEBIRDS', player('saf-elijah-sarratt', 'Elijah Sarratt', 'WR', 'BAL')),
   pick(34, "Soup's Kitchen", player('saf-adonai-mitchell', 'Adonai Mitchell', 'WR', 'NYJ'), { veteranLikely: true }),
   pick(35, 'LLESSUR REMLAP', player('saf-jam-miller', 'Jam Miller', 'RB', 'NE')),
+  // 3.04 (#36) not logged
+  pick(37, 'Scribbles', player('saf-eli-stowers', 'Eli Stowers', 'TE', 'PHI', { draftPick: '3.05' })),
 ];
 
-// Pick 36 is on the board. Scribbles are next at 3.05 (#37).
-// Washington went 1.03. Singleton is already on the roster. 3.05 is Stowers.
+// Stowers is in. Next Scribbles pick: 4.05 (#53). Picks 36 and 38–52 not logged.
+// TE is done (Kincaid, Juwan, Knox, Stowers). Do not take Raridon.
 export const REMAINING_BOARD = [
-  player('saf-eli-stowers', 'Eli Stowers', 'TE', 'PHI', {
-    ecr: 12,
-    verdict: 'TAKE',
-    why: 'Best remaining prospect. 2nd-round TE2 of the class. 2026 is dead (hamstring, likely inactive). 2027 bet after Goedert.',
-  }),
   player('saf-eli-raridon', 'Eli Raridon', 'TE', 'NE', {
     ecr: 28,
-    verdict: 'IF STOWERS GONE',
-    why: 'TE2 in New England after Julian Hill IR. Camp buzz. Take him if 36 (or pick 20) already took Stowers.',
+    verdict: 'PASS',
+    why: 'You just took Stowers. Kincaid, Juwan, Knox, Stowers is enough TE.',
+  }),
+  player('saf-eli-heidenreich', 'Eli Heidenreich', 'RB', 'PIT', {
+    ecr: 42,
+    verdict: 'LAST DART',
+    why: 'Seventh-rounder, practice-squad track behind Warren/Dowdle. Only if 4.05 is a barren rookie board with no veteran RB.',
   }),
 ];
 
 export const PICK_COMPARISON = {
-  overallPick: 37,
+  overallPick: 53,
   takenOrderUnconfirmed: true,
   recommendation: {
-    name: 'Eli Stowers',
-    positions: ['TE'],
-    team: 'PHI',
-    line: 'Washington went 1.03. Take Stowers. If he is gone, take Raridon. Do not take a WR, a kicker, or Heidenreich.',
+    name: 'Veteran RB',
+    positions: ['RB'],
+    team: '—',
+    line: 'Stowers is in. At 4.05 hunt a veteran RB who can play 2026 — this board already took Ty Johnson. Send picks 36 and 38–52. Do not take Raridon, another WR, or a kicker.',
   },
   candidates: REMAINING_BOARD,
 };
 
-export const SPORTS_AND_FUN_SEED_VERSION = 8;
+export const SPORTS_AND_FUN_SEED_VERSION = 9;
 
 export function sportsAndFunDraftSeed() {
   return {

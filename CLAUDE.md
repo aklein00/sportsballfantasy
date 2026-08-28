@@ -284,9 +284,9 @@ Draft board seeded from `src/data/industryFootball.js` — picks 1–24 from CBS
 
 **Active (screenshot 1):** C.J. Stroud · Travis Etienne, Breece Hall · Ja'Marr Chase, Michael Wilson · Juwan Johnson · Michael Pittman Jr. (RWT) · Cam Little · Commanders
 
-**Rest of roster (screenshots 2–3, Stevenson traded):** Geno Smith · Jerome Ford, Najee Harris · Garrett Wilson, Jayden Reed, Cedric Tillman, Tre Tucker, Christian Kirk, Joshua Palmer, KaVontae Turpin · Dalton Kincaid, Dawson Knox
+**Rest of roster (screenshots 2–3, Stevenson traded, plus rookies):** Geno Smith · Jerome Ford, Najee Harris, Nicholas Singleton · Garrett Wilson, Jayden Reed, Cedric Tillman, Tre Tucker, Christian Kirk, Joshua Palmer, KaVontae Turpin, Makai Lemon, Omar Cooper Jr. · Dalton Kincaid, Dawson Knox, Eli Stowers
 
-**2026 rookie draft (16-team linear, slot #5):** 1.03 Mike Washington Jr. (RB, LV) is gone. 1.05 Makai Lemon (WR, PHI). 2.05 Nicholas Singleton (RB, TEN). 2.09 Omar Cooper Jr. (WR, NYJ). Board through #35. Next: 3.05 (#37). Take Eli Stowers; if gone, Eli Raridon.
+**2026 rookie draft (16-team linear, slot #5):** 1.05 Makai Lemon (WR, PHI). 2.05 Nicholas Singleton (RB, TEN). 2.09 Omar Cooper Jr. (WR, NYJ). 3.05 Eli Stowers (TE, PHI). Next: 4.05 (#53). Hunt a veteran RB who can play 2026.
 
 **Trade:** Rhamondre Stevenson for 2026 2.09 + a 2027 2nd.
 
