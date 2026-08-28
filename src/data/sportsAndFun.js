@@ -102,12 +102,12 @@ export const MY_TEAM = {
 };
 
 export const DRAFT_PICKS = [
-  // 1.01–1.04: owner said these four were gone before 1.05. Slot order unconfirmed.
+  // 1.01 / 1.02 / 1.04: Love, Price, Tate — owner named them gone before 1.05; slot order unconfirmed.
   pick(1, teamName(1), player('saf-jeremiyah-love', 'Jeremiyah Love', 'RB', 'ARI'), { orderUnconfirmed: true }),
   pick(2, teamName(2), player('saf-jadarian-price', 'Jadarian Price', 'RB', 'SEA'), { orderUnconfirmed: true }),
-  pick(3, teamName(3), player('saf-carnell-tate', 'Carnell Tate', 'WR', 'TEN'), { orderUnconfirmed: true }),
-  // 1.04 not logged — "M. Washington" was named among the four gone before 1.05, but
-  // Washington is still on the board at 3.05, so that mapping was wrong.
+  // 1.03 confirmed by owner
+  pick(3, teamName(3), player('saf-mike-washington', 'Mike Washington Jr.', 'RB', 'LV')),
+  pick(4, teamName(4), player('saf-carnell-tate', 'Carnell Tate', 'WR', 'TEN'), { orderUnconfirmed: true }),
   // 1.05–1.16 and 2.01–2.03 from CBS draft-board screenshots
   pick(5, 'Scribbles', player('saf-makai-lemon', 'Makai Lemon', 'WR', 'PHI', { draftPick: '1.05' })),
   pick(6, 'FREEBIRDS', player('saf-fernando-mendoza', 'Fernando Mendoza', 'QB', 'LV')),
@@ -144,22 +144,18 @@ export const DRAFT_PICKS = [
   pick(35, 'LLESSUR REMLAP', player('saf-jam-miller', 'Jam Miller', 'RB', 'NE')),
 ];
 
-// Pick 36 is on the board. Scribbles are next at 3.05 (#37). Singleton is already on the roster.
+// Pick 36 is on the board. Scribbles are next at 3.05 (#37).
+// Washington went 1.03. Singleton is already on the roster. 3.05 is Stowers.
 export const REMAINING_BOARD = [
-  player('saf-mike-washington-jr', 'Mike Washington Jr.', 'RB', 'LV', {
-    ecr: 24,
-    verdict: 'TAKE',
-    why: 'Jeanty ankle. 8-49 last night, 168 preseason yards at 7.3 YPC. You already have Singleton — this is the 2026 RB dart.',
-  }),
   player('saf-eli-stowers', 'Eli Stowers', 'TE', 'PHI', {
     ecr: 12,
-    verdict: 'IF WASHINGTON GONE',
-    why: 'Best remaining prospect (2nd-round TE2 of the class). 2026 is dead — hamstring, likely inactive. 2027 bet after Goedert.',
+    verdict: 'TAKE',
+    why: 'Best remaining prospect. 2nd-round TE2 of the class. 2026 is dead (hamstring, likely inactive). 2027 bet after Goedert.',
   }),
   player('saf-eli-raridon', 'Eli Raridon', 'TE', 'NE', {
     ecr: 28,
-    verdict: 'IF STOWERS GONE TOO',
-    why: 'TE2 in New England after Julian Hill IR. Camp buzz. Take him only if Washington and Stowers are both gone.',
+    verdict: 'IF STOWERS GONE',
+    why: 'TE2 in New England after Julian Hill IR. Camp buzz. Take him if 36 (or pick 20) already took Stowers.',
   }),
 ];
 
@@ -167,15 +163,15 @@ export const PICK_COMPARISON = {
   overallPick: 37,
   takenOrderUnconfirmed: true,
   recommendation: {
-    name: 'Mike Washington Jr.',
-    positions: ['RB'],
-    team: 'LV',
-    line: 'Take Washington. If 36 takes him, take Eli Stowers. If Stowers is gone too, take Eli Raridon. Do not take a WR, a kicker, or Heidenreich.',
+    name: 'Eli Stowers',
+    positions: ['TE'],
+    team: 'PHI',
+    line: 'Washington went 1.03. Take Stowers. If he is gone, take Raridon. Do not take a WR, a kicker, or Heidenreich.',
   },
   candidates: REMAINING_BOARD,
 };
 
-export const SPORTS_AND_FUN_SEED_VERSION = 7;
+export const SPORTS_AND_FUN_SEED_VERSION = 8;
 
 export function sportsAndFunDraftSeed() {
   return {
